@@ -1,5 +1,7 @@
+import hello from "../src/hello.js";
+
 describe("Test", () => {
   test("Hello world", () => {
-    expect("Hello World!").toBe("Hello World!");
+    expect(hello()).toBe("Hello World!");
   });
 });
