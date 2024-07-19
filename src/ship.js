@@ -8,4 +8,16 @@ class Ship {
   constructor(length) {
     this.#length = length;
   }
+
+  // Getters
+  get hitCount() {
+    return this.#hitCount;
+  }
+
+  // Methods
+  hit() {
+    this.#hitCount++;
+  }
 }
+
+export default Ship;
