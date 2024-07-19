@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "New Project | Erick B. Gómez",
+      title: "Battleship | Erick B. Gómez",
       favicon: "./src/img/erick-notepad.svg",
     }),
   ],
