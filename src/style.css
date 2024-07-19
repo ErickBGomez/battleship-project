@@ -1,0 +1,48 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Typography */
+  font-size: 16px;
+  font-family: monospace;
+
+  /* Colors */
+  --Black: #25272c;
+  --White: #fafafa;
+}
+
+body {
+  color: var(--Black);
+  background-color: var(--White);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Template tweaks (Delete later) */
+body {
+  background-color: #272b2e;
+}
+
+.icon {
+  display: block;
+  width: 100px;
+  height: 100px;
+  opacity: 0.04;
+}
