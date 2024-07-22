@@ -17,9 +17,23 @@ describe("Coordinates tests", () => {
     expect(Coordinates.validate("K11")).toBe(false);
   });
 
-  test("Parse valid column index", () => {
+  test("Parse valid column index (minimum)", () => {
     const coords = new Coordinates("A1");
-
     expect(coords.columnIndex).toBe(0);
+  });
+
+  test("Parse valid row index (minimum)", () => {
+    const coords = new Coordinates("A1");
+    expect(coords.columnIndex).toBe(0);
+  });
+
+  test("Parse valid column index (maximum)", () => {
+    const coords = new Coordinates("J10");
+    expect(coords.columnIndex).toBe(9);
+  });
+
+  test("Parse valid row index (maximum)", () => {
+    const coords = new Coordinates("J10");
+    expect(coords.columnIndex).toBe(9);
   });
 });
