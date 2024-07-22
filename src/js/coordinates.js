@@ -1,3 +1,5 @@
+import { validate } from "webpack";
+
 class Coordinates {
   #column;
 
@@ -6,6 +8,22 @@ class Coordinates {
   // Values should be passed as "A1", "D3", etc...
   constructor(value) {
     this.value = value;
+    this.#parse();
+  }
+
+  // Getters
+  get columnIndex() {
+    return this.#column;
+  }
+
+  get rowIndex() {
+    return this.#row;
+  }
+
+  // Private methods
+  #parse() {
+    this.#column = this.value.charCodeAt(0) - 65;
+    this.#row = Number(this.value.slice(1));
   }
 
   // Methods
