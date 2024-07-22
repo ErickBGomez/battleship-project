@@ -13,12 +13,16 @@ class Ship {
   }
 
   // Getters
-  get hitCount() {
-    return this.#hitCount;
+  get length() {
+    return this.#length;
   }
 
   get name() {
     return this.#name;
+  }
+
+  get hitCount() {
+    return this.#hitCount;
   }
 
   // Methods
