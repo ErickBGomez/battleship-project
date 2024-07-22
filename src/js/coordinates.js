@@ -1,4 +1,4 @@
-import { validate } from "webpack";
+import InvalidCoordinatesError from "./errors/invalidCoordinatesError.js";
 
 class Coordinates {
   #column;
@@ -7,6 +7,10 @@ class Coordinates {
 
   // Values should be passed as "A1", "D3", etc...
   constructor(value) {
+    if (!Coordinates.validate(value)) {
+      throw new InvalidCoordinatesError(`${value} is not a valid format`);
+    }
+
     this.value = value;
     this.#parse();
   }
