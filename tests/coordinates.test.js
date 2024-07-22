@@ -1,4 +1,5 @@
 import Coordinates from "../src/js/coordinates.js";
+import InvalidCoordinatesError from "../src/js/errors/invalidCoordinatesError.js";
 
 describe("Coordinates tests", () => {
   test("Minimum valid coordinates", () => {
@@ -35,5 +36,9 @@ describe("Coordinates tests", () => {
   test("Parse valid row index (maximum)", () => {
     const coords = new Coordinates("J10");
     expect(coords.columnIndex).toBe(9);
+  });
+
+  test("Throw error when creating an invalid coordinates object", () => {
+    expect(() => new Coordinates("K11")).toThrow(InvalidCoordinatesError);
   });
 });
