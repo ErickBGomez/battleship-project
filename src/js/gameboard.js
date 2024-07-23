@@ -6,20 +6,31 @@ class Gameboard {
 
   #failedHits = 0;
 
-  #availableShips = 5;
+  #availableShips;
 
-  constructor() {
+  #ships;
+
+  constructor(ships) {
     this.#board = new Array(10)
       .fill()
       .map(() => new Array({ ship: null, hit: false }));
+
+    this.#ships = ships;
+    this.#autoPlaceShips();
+  }
+
+  // Private methods
+  // Only for testing: Place ships automatically
+  #autoPlaceShips() {
+    this.placeShip(this.#ships[0], new Coordinates("A1"));
+    this.placeShip(this.#ships[1], new Coordinates("B1"));
+    this.placeShip(this.#ships[2], new Coordinates("C1"));
+    this.placeShip(this.#ships[3], new Coordinates("D1"));
+    this.placeShip(this.#ships[4], new Coordinates("E1"));
   }
 
   // Methods
-  placeShip(
-    ship = new Ship(2),
-    coordinates = new Coordinates("A1"),
-    direction = "down",
-  ) {
+  placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
     let currentColumn = coordinates.columnIndex;
     let currentRow = coordinates.rowIndex;
 
