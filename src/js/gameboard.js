@@ -51,6 +51,12 @@ class Gameboard {
   }
 
   // Methods
+
+  // TODO: With this approach out of bounds and overriding ship can be avoided
+  // but it doesn't stop inserting a ship in the middle of the process, leaving with
+  // some part of the ship inserted.
+
+  // Find a way to first validate if the ship and then place it in the board
   placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
     let currentColumn = coordinates.columnIndex;
     let currentRow = coordinates.rowIndex;
