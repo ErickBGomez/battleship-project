@@ -9,8 +9,17 @@ describe("Gameboard tests", () => {
     const ship = new Ship(2);
     gb.placeShip(ship, new Coordinates("A1"));
 
-    const allCellsFree = gb.isCellAvailable(0, 0) && gb.isCellAvailable(0, 1);
+    const shipInserted = !gb.isCellAvailable(0, 0) && !gb.isCellAvailable(0, 1);
 
-    expect(allCellsFree).toBe(false);
+    expect(shipInserted).toBe(true);
+  });
+
+  test("Place ship at the given direction", () => {
+    const ship = new Ship(2);
+    gb.placeShip(ship, new Coordinates("B1"), "right");
+
+    const shipInserted = !gb.isCellAvailable(1, 0) && !gb.isCellAvailable(2, 0);
+
+    expect(shipInserted).toBe(true);
   });
 });
