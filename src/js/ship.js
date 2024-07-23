@@ -7,7 +7,7 @@ class Ship {
 
   #sunk = false;
 
-  constructor(length, name) {
+  constructor(length, name = "Ship") {
     this.#length = length;
     this.#name = name;
   }
