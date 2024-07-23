@@ -29,16 +29,25 @@ class Gameboard {
     this.placeShip(this.#ships[4], new Coordinates("E1"));
   }
 
+  static inBounds(column, row) {
+    return column >= 0 && column <= 9 && row >= 0 && row <= 9;
+  }
+
   // Methods
   placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
     let currentColumn = coordinates.columnIndex;
     let currentRow = coordinates.rowIndex;
 
     for (let i = 0; i < ship.length; i++) {
+      // Error: Ship out of bounds
+
       // Error: Cannot override ship information
+      if (this.#board[currentColumn][currentRow].ship !== null) {
+        throw new Error("Cannot override ship information");
+      }
+
       this.#board[currentColumn][currentRow].ship = ship;
 
-      // Error: Ship out of bounds
       switch (direction) {
         case "up":
           currentRow--;
