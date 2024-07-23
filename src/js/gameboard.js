@@ -29,7 +29,7 @@ class Gameboard {
     this.placeShip(this.#ships[4], new Coordinates("E1"));
   }
 
-  static inBounds(column, row) {
+  static #inBounds(column, row) {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
@@ -40,9 +40,12 @@ class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       // Error: Ship out of bounds
+      if (!Gameboard.#inBounds(currentColumn, currentRow)) {
+        throw new Error("Ship out of bounds");
+      }
 
-      // Error: Cannot override ship information
       if (this.#board[currentColumn][currentRow].ship !== null) {
+        // Error: Cannot override ship information
         throw new Error("Cannot override ship information");
       }
 
