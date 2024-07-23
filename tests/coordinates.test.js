@@ -25,7 +25,7 @@ describe("Coordinates tests", () => {
 
   test("Parse valid row index (minimum)", () => {
     const coords = new Coordinates("A1");
-    expect(coords.columnIndex).toBe(0);
+    expect(coords.rowIndex).toBe(0);
   });
 
   test("Parse valid column index (maximum)", () => {
@@ -35,7 +35,7 @@ describe("Coordinates tests", () => {
 
   test("Parse valid row index (maximum)", () => {
     const coords = new Coordinates("J10");
-    expect(coords.columnIndex).toBe(9);
+    expect(coords.rowIndex).toBe(9);
   });
 
   test("Throw error when creating an invalid coordinates object", () => {

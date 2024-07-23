@@ -27,7 +27,7 @@ class Coordinates {
   // Private methods
   #parse() {
     this.#column = this.value.charCodeAt(0) - 65;
-    this.#row = Number(this.value.slice(1));
+    this.#row = Number(this.value.slice(1)) - 1;
   }
 
   // Methods
