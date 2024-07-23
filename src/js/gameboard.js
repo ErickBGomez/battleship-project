@@ -15,8 +15,10 @@ class Gameboard {
       .fill()
       .map(() => new Array({ ship: null, hit: false }));
 
-    this.#ships = ships;
-    this.#autoPlaceShips();
+    if (ships) {
+      this.#ships = ships;
+      this.#autoPlaceShips();
+    }
   }
 
   // Private methods
