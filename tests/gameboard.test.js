@@ -22,4 +22,11 @@ describe("Gameboard tests", () => {
 
     expect(shipInserted).toBe(true);
   });
+
+  test("Cannot place ship in a occupied cell", () => {
+    const ship = new Ship(2);
+    expect(() => gb.placeShip(ship, new Coordinates("A2"), "up")).toThrow(
+      Error,
+    );
+  });
 });
