@@ -11,14 +11,25 @@ class Gameboard {
   #ships;
 
   constructor(ships) {
-    this.#board = new Array(10)
-      .fill()
-      .map(() => new Array({ ship: null, hit: false }));
+    this.#initializeBoard();
 
     if (ships) {
       this.#ships = ships;
       this.#autoPlaceShips();
     }
+  }
+
+  #initializeBoard() {
+    this.#board = Array(10)
+      .fill()
+      .map(() =>
+        Array(10)
+          .fill()
+          .map(() => ({
+            ship: null,
+            hit: false,
+          })),
+      );
   }
 
   // Private methods
