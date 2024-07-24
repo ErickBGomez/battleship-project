@@ -19,6 +19,7 @@ class Gameboard {
     }
   }
 
+  // Private methods
   #initializeBoard() {
     this.#board = Array(10)
       .fill()
@@ -32,7 +33,6 @@ class Gameboard {
       );
   }
 
-  // Private methods
   // Only for testing: Place ships automatically
   #autoPlaceShips() {
     this.placeShip(this.#ships[0], new Coordinates("A1"));
