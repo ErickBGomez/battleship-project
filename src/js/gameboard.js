@@ -46,7 +46,11 @@ class Gameboard {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
-  isCellAvailable(column, row) {
+  isCellAvailable(coordinates) {
+    return this.#isCellAvailable(coordinates.columnIndex, coordinates.rowIndex);
+  }
+
+  #isCellAvailable(column, row) {
     return this.#board[column][row].ship === null;
   }
 
@@ -67,7 +71,7 @@ class Gameboard {
         throw new Error("Ship out of bounds");
       }
 
-      if (!this.isCellAvailable(currentColumn, currentRow)) {
+      if (!this.#isCellAvailable(currentColumn, currentRow)) {
         // Error: Cannot override ship information
         throw new Error("Cannot override ship information");
       }

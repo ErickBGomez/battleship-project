@@ -9,7 +9,9 @@ describe("Gameboard tests", () => {
     const ship = new Ship(2);
     gb.placeShip(ship, new Coordinates("A1"));
 
-    const shipInserted = !gb.isCellAvailable(0, 0) && !gb.isCellAvailable(0, 1);
+    const shipInserted =
+      !gb.isCellAvailable(new Coordinates("A1")) &&
+      !gb.isCellAvailable(new Coordinates("A2"));
 
     expect(shipInserted).toBe(true);
   });
@@ -18,7 +20,9 @@ describe("Gameboard tests", () => {
     const ship = new Ship(2);
     gb.placeShip(ship, new Coordinates("B1"), "right");
 
-    const shipInserted = !gb.isCellAvailable(1, 0) && !gb.isCellAvailable(2, 0);
+    const shipInserted =
+      !gb.isCellAvailable(new Coordinates("B1")) &&
+      !gb.isCellAvailable(new Coordinates("C1"));
 
     expect(shipInserted).toBe(true);
   });
