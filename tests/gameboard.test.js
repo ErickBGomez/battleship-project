@@ -2,7 +2,7 @@ import Coordinates from "../src/js/coordinates.js";
 import Gameboard from "../src/js/gameboard.js";
 import Ship from "../src/js/ship.js";
 import ShipPlacementError from "../src/js/errors/shipPlacementError.js";
-import ShipOutOfBoundsError from "../src/js/errors/shipOutOfBoundsError.js";
+import OutOfBoundsError from "../src/js/errors/outOfBoundsError.js";
 
 const gb = new Gameboard();
 
@@ -39,7 +39,7 @@ describe("Gameboard tests", () => {
   test("Cannot place ship out of bounds", () => {
     const ship = new Ship(3);
     expect(() => gb.placeShip(ship, new Coordinates("A3"), "left")).toThrow(
-      ShipOutOfBoundsError,
+      OutOfBoundsError,
     );
   });
 
