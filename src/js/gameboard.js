@@ -6,9 +6,9 @@ import OutOfBoundsError from "./errors/outOfBoundsError";
 class Gameboard {
   #board;
 
-  #failedHits = 0;
-
   #availableShips = 0;
+
+  #failedHits = 0;
 
   #ships;
 
@@ -28,6 +28,10 @@ class Gameboard {
 
   get availableShips() {
     return this.#availableShips;
+  }
+
+  get failedHits() {
+    return this.#failedHits;
   }
 
   // Private methods

@@ -60,11 +60,15 @@ describe("Gameboard: Receive attacks", () => {
     );
   });
 
-  test("Send attack to a empty space", () => {
+  test("Send attack to a empty cell", () => {
     const coords = new Coordinates("C3");
     gb.receiveAttack(coords);
 
     expect(gb.board[coords.columnIndex][coords.rowIndex].hit).toBe(true);
+  });
+
+  test("Update failedHits after sending a attack to a empty cell", () => {
+    expect(gb.failedHits).toBe(1);
   });
 
   test("Cannot hit same cell twice", () => {
