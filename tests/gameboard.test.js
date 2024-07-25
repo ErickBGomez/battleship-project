@@ -49,4 +49,21 @@ describe("Gameboard: Ship placement", () => {
   });
 });
 
-describe("Gameboard: Receive attacks");
+describe("Gameboard: Receive attacks", () => {
+  test("Cannot receive a out of bounds attack", () => {
+    expect(() => gb.receiveAttack(new Coordinates("K11"))).toThrow(
+      OutOfBoundsError,
+    );
+  });
+
+  test("Send attack to a empty space", () => {
+    const coords = new Coordinates("C3");
+    gb.receiveAttack(coords);
+
+    expect(gb.board[coords.columnIndex][coords.rowIndex].hit).toBe(true);
+  });
+
+  test("Cannot hit same cell twice", () => {
+    expect(() => gb.receiveAttack(new Coordinates("C3"))).toThrow(Error);
+  });
+});

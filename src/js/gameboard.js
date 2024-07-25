@@ -141,22 +141,24 @@ class Gameboard {
       throw new OutOfBoundsError("Attack coordinates is out of bounds");
     }
 
-    if (!this.isCellAvailable(coordinates)) {
-      if (this.#board[coordinates.columnIndex][coordinates.rowIndex].hit) {
-        throw new Error("Cell has been hit before");
-      }
+    const currentCell =
+      this.#board[coordinates.columnIndex][coordinates.rowIndex];
 
-      const { ship } =
-        this.#board[coordinates.columnIndex][coordinates.rowIndex];
+    if (currentCell.hit) {
+      throw new Error("Cell has been hit before");
+    }
+
+    if (!this.isCellAvailable(coordinates)) {
+      const { ship } = currentCell;
 
       ship.hit();
-
-      this.#board[coordinates.columnIndex][coordinates.rowIndex].hit = true;
 
       if (ship.isSunk()) this.#availableShips--;
     } else {
       this.#failedHits++;
     }
+
+    currentCell.hit = true;
   }
 }
 
