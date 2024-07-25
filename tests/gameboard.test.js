@@ -37,9 +37,14 @@ describe("Gameboard tests", () => {
   });
 
   test("Cannot place ship out of bounds", () => {
-    const ship = new Ship(2);
+    const ship = new Ship(3);
     expect(() => gb.placeShip(ship, new Coordinates("A3"), "left")).toThrow(
       ShipOutOfBoundsError,
     );
+  });
+
+  test("Cannot accept incorrect direction values", () => {
+    const ship = new Ship(2);
+    expect(() => gb.placeShip(ship, new Coordinates("A4"), "a")).toThrow(Error);
   });
 });
