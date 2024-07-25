@@ -1,4 +1,3 @@
-import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ShipPlacementError from "./errors/shipPlacementError";
 import OutOfBoundsError from "./errors/outOfBoundsError";
@@ -12,13 +11,8 @@ class Gameboard {
 
   #ships;
 
-  constructor(ships) {
+  constructor() {
     this.#initializeBoard();
-
-    if (ships) {
-      this.#ships = ships;
-      this.#autoPlaceShips();
-    }
   }
 
   // Getters
@@ -48,21 +42,16 @@ class Gameboard {
       );
   }
 
-  // Only for testing: Place ships automatically
-  #autoPlaceShips() {
-    this.placeShip(this.#ships[0], new Coordinates("A1"));
-    this.placeShip(this.#ships[1], new Coordinates("B1"));
-    this.placeShip(this.#ships[2], new Coordinates("C1"));
-    this.placeShip(this.#ships[3], new Coordinates("D1"));
-    this.placeShip(this.#ships[4], new Coordinates("E1"));
-  }
-
   static #inBounds(column, row) {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
-  isCellAvailable(coordinates) {
-    return this.#isCellAvailable(coordinates.columnIndex, coordinates.rowIndex);
+  #getCell(column, row) {
+    return this.#board[column][row];
+  }
+
+  #getCellByCoordinates(coordinates) {
+    return this.#board[coordinates.columnIndex][coordinates.rowIndex];
   }
 
   #isCellAvailable(column, row) {
@@ -109,7 +98,11 @@ class Gameboard {
     }
   }
 
-  // Methods
+  // Public Methods
+  isCellAvailable(coordinates) {
+    return this.#isCellAvailable(coordinates.columnIndex, coordinates.rowIndex);
+  }
+
   placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
     // Throw error and avoid placing the ship
     this.#validatePlacement(ship, coordinates, direction);
@@ -119,7 +112,8 @@ class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       // Place ship
-      this.#board[currentColumn][currentRow].ship = ship;
+      const currentCell = this.#getCell(currentColumn, currentRow);
+      currentCell.ship = ship;
 
       // Move next insertion based on specified direction
       switch (direction) {
@@ -151,19 +145,18 @@ class Gameboard {
       throw new OutOfBoundsError("Attack coordinates is out of bounds");
     }
 
-    const currentCell =
-      this.#board[coordinates.columnIndex][coordinates.rowIndex];
+    const currentCell = this.#getCellByCoordinates(coordinates);
 
     if (currentCell.hit) {
       throw new Error("Cell has been hit before");
     }
 
     if (!this.isCellAvailable(coordinates)) {
-      const { ship } = currentCell;
+      const { ship: shipFound } = currentCell;
 
-      ship.hit();
+      shipFound.hit();
 
-      if (ship.isSunk()) this.#availableShips--;
+      if (shipFound.isSunk()) this.#availableShips--;
     } else {
       this.#failedHits++;
     }
