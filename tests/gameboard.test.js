@@ -33,4 +33,11 @@ describe("Gameboard tests", () => {
       Error,
     );
   });
+
+  test("Cannot place ship out of bounds", () => {
+    const ship = new Ship(2);
+    expect(() => gb.placeShip(ship, new Coordinates("A3"), "left")).toThrow(
+      Error,
+    );
+  });
 });
