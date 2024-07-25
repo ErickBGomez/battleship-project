@@ -8,7 +8,7 @@ class Gameboard {
 
   #failedHits = 0;
 
-  #availableShips;
+  #availableShips = 0;
 
   #ships;
 
@@ -24,6 +24,10 @@ class Gameboard {
   // Getters
   get board() {
     return this.#board;
+  }
+
+  get availableShips() {
+    return this.#availableShips;
   }
 
   // Private methods
@@ -134,6 +138,8 @@ class Gameboard {
         default: // Invalid direction value has been validated before
       }
     }
+
+    this.#availableShips++;
   }
 
   receiveAttack(coordinates) {

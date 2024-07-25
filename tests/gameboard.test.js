@@ -29,6 +29,10 @@ describe("Gameboard: Ship placement", () => {
     expect(shipInserted).toBe(true);
   });
 
+  test("Update availableShips value after insertion", () => {
+    expect(gb.availableShips).toBe(2);
+  });
+
   test("Cannot place ship in a occupied cell", () => {
     const ship = new Ship(2);
     expect(() => gb.placeShip(ship, new Coordinates("A2"), "up")).toThrow(
@@ -81,5 +85,9 @@ describe("Gameboard: Receive attacks", () => {
     expect(gb.board[coords.columnIndex][coords.rowIndex].ship.isSunk()).toBe(
       true,
     );
+  });
+
+  test("Update availableShips value after a ship is sunk", () => {
+    expect(gb.availableShips).toBe(1);
   });
 });
