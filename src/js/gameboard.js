@@ -1,5 +1,7 @@
 import Ship from "./ship";
 import Coordinates from "./coordinates";
+import ShipPlacementError from "./errors/shipPlacementError";
+import ShipOutOfBoundsError from "./errors/shipOutOfBoundsError";
 
 class Gameboard {
   #board;
@@ -68,12 +70,12 @@ class Gameboard {
     for (let i = 0; i < ship.length; i++) {
       // Error: Ship out of bounds
       if (!Gameboard.#inBounds(currentColumn, currentRow)) {
-        throw new Error("Ship out of bounds");
+        throw new ShipOutOfBoundsError("Ship out of bounds");
       }
 
       if (!this.#isCellAvailable(currentColumn, currentRow)) {
         // Error: Cannot override ship information
-        throw new Error("Cannot override ship information");
+        throw new ShipPlacementError("Cannot place over another ship");
       }
 
       // Place ship
