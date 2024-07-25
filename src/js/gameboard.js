@@ -33,13 +33,14 @@ class Gameboard {
     this.#board = Array(10)
       .fill()
       .map(() =>
+        // eslint-disable-next-line implicit-arrow-linebreak
         Array(10)
           .fill()
           .map(() => ({
             ship: null,
             hit: false,
           })),
-      );
+      ); // eslint-disable-line function-paren-newline
   }
 
   static #inBounds(column, row) {

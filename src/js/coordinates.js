@@ -1,4 +1,4 @@
-import InvalidCoordinatesError from "./errors/invalidCoordinatesError.js";
+import InvalidCoordinatesError from "./errors/invalidCoordinatesError";
 
 class Coordinates {
   #column;
