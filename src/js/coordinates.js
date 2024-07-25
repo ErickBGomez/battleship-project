@@ -32,7 +32,7 @@ class Coordinates {
 
   // Methods
   static validate(coordinates) {
-    const pattern = /^[A-J](?:[1-9]|10)$/;
+    const pattern = /^[A-Z][1-9]\d*$/;
     return pattern.test(coordinates);
   }
 }
