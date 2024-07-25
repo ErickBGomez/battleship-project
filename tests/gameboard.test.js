@@ -66,4 +66,20 @@ describe("Gameboard: Receive attacks", () => {
   test("Cannot hit same cell twice", () => {
     expect(() => gb.receiveAttack(new Coordinates("C3"))).toThrow(Error);
   });
+
+  test("Send attack to a ship", () => {
+    const coords = new Coordinates("A1");
+    gb.receiveAttack(coords);
+
+    expect(gb.board[coords.columnIndex][coords.rowIndex].ship.hitCount).toBe(1);
+  });
+
+  test("Sink a ship", () => {
+    const coords = new Coordinates("A2");
+    gb.receiveAttack(coords);
+
+    expect(gb.board[coords.columnIndex][coords.rowIndex].ship.isSunk()).toBe(
+      true,
+    );
+  });
 });
