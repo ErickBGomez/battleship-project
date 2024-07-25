@@ -21,6 +21,10 @@ class Gameboard {
     }
   }
 
+  get board() {
+    return this.#board;
+  }
+
   // Private methods
   #initializeBoard() {
     this.#board = Array(10)
