@@ -1,7 +1,7 @@
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ShipPlacementError from "./errors/shipPlacementError";
-import ShipOutOfBoundsError from "./errors/shipOutOfBoundsError";
+import OutOfBoundsError from "./errors/outOfBoundsError";
 
 class Gameboard {
   #board;
@@ -21,6 +21,7 @@ class Gameboard {
     }
   }
 
+  // Getters
   get board() {
     return this.#board;
   }
@@ -67,7 +68,7 @@ class Gameboard {
     for (let i = 0; i < ship.length; i++) {
       // Error: Ship out of bounds
       if (!Gameboard.#inBounds(currentColumn, currentRow)) {
-        throw new ShipOutOfBoundsError("Ship out of bounds");
+        throw new OutOfBoundsError("Ship out of bounds");
       }
 
       if (!this.#isCellAvailable(currentColumn, currentRow)) {
@@ -132,6 +133,29 @@ class Gameboard {
 
         default: // Invalid direction value has been validated before
       }
+    }
+  }
+
+  receiveAttack(coordinates) {
+    if (!Gameboard.#inBounds(coordinates.columnIndex, coordinates.rowIndex)) {
+      throw new OutOfBoundsError("Attack coordinates is out of bounds");
+    }
+
+    if (!this.isCellAvailable(coordinates)) {
+      if (this.#board[coordinates.columnIndex][coordinates.rowIndex].hit) {
+        throw new Error("Cell has been hit before");
+      }
+
+      const { ship } =
+        this.#board[coordinates.columnIndex][coordinates.rowIndex];
+
+      ship.hit();
+
+      this.#board[coordinates.columnIndex][coordinates.rowIndex].hit = true;
+
+      if (ship.isSunk()) this.#availableShips--;
+    } else {
+      this.#failedHits++;
     }
   }
 }
