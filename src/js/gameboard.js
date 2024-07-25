@@ -60,14 +60,7 @@ class Gameboard {
     return this.#board[column][row].ship === null;
   }
 
-  // Methods
-
-  // TODO: With this approach out of bounds and overriding ship can be avoided
-  // but it doesn't stop inserting a ship in the middle of the process, leaving with
-  // some part of the ship inserted.
-
-  // Find a way to first validate if the ship and then place it in the board
-  placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
+  #validatePlacement(ship, coordinates, direction) {
     let currentColumn = coordinates.columnIndex;
     let currentRow = coordinates.rowIndex;
 
@@ -81,9 +74,6 @@ class Gameboard {
         // Error: Cannot override ship information
         throw new ShipPlacementError("Cannot place over another ship");
       }
-
-      // Place ship
-      this.#board[currentColumn][currentRow].ship = ship;
 
       // Move next insertion based on specified direction
       switch (direction) {
@@ -106,6 +96,41 @@ class Gameboard {
         default:
           // Error: Invalid direction
           throw new Error("Invalid direction");
+      }
+    }
+  }
+
+  // Methods
+  placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
+    // Throw error and avoid placing the ship
+    this.#validatePlacement(ship, coordinates, direction);
+
+    let currentColumn = coordinates.columnIndex;
+    let currentRow = coordinates.rowIndex;
+
+    for (let i = 0; i < ship.length; i++) {
+      // Place ship
+      this.#board[currentColumn][currentRow].ship = ship;
+
+      // Move next insertion based on specified direction
+      switch (direction) {
+        case "up":
+          currentRow--;
+          break;
+
+        case "down":
+          currentRow++;
+          break;
+
+        case "right":
+          currentColumn++;
+          break;
+
+        case "left":
+          currentColumn--;
+          break;
+
+        default: // Invalid direction value has been validated before
       }
     }
   }
