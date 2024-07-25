@@ -1,7 +1,7 @@
 class InvalidCoordinatesError extends Error {
   constructor(message) {
     super(message);
-    this.name = "InvalidCoordinates";
+    this.name = "InvalidCoordinatesError";
   }
 }
 
