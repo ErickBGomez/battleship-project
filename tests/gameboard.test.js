@@ -6,7 +6,7 @@ import OutOfBoundsError from "../src/js/errors/outOfBoundsError.js";
 
 const gb = new Gameboard();
 
-describe("Gameboard tests", () => {
+describe("Gameboard: Ship placement", () => {
   test("Place ship at any coordinates", () => {
     const ship = new Ship(2);
     gb.placeShip(ship, new Coordinates("A1"));
@@ -48,3 +48,5 @@ describe("Gameboard tests", () => {
     expect(() => gb.placeShip(ship, new Coordinates("A4"), "a")).toThrow(Error);
   });
 });
+
+describe("Gameboard: Receive attacks");
