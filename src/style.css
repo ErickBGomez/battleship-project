@@ -89,3 +89,7 @@ button {
 .cell.ship.hit {
   background-color: red;
 }
+
+.cell.ship.sunk {
+  background-color: black;
+}

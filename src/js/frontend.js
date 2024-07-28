@@ -43,7 +43,11 @@ function setCells(player) {
       cell.dataset.coordinates = coordinates;
 
       const gameCell = player.gameboard.board[j][i];
-      if (gameCell.ship) cell.classList.add("ship");
+      if (gameCell.ship) {
+        cell.classList.add("ship");
+        if (gameCell.ship.isSunk()) cell.classList.add("sunk");
+      }
+
       if (gameCell.hit) cell.classList.add("hit");
 
       cell.addEventListener("click", (e) => selectCell(e.target, player));
