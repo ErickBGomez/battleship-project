@@ -164,6 +164,10 @@ class Gameboard {
 
     currentCell.hit = true;
   }
+
+  allShipsSunk() {
+    return this.#availableShips === 0;
+  }
 }
 
 export default Gameboard;

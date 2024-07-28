@@ -94,4 +94,11 @@ describe("Gameboard: Receive attacks", () => {
   test("Update availableShips value after a ship is sunk", () => {
     expect(gb.availableShips).toBe(1);
   });
+
+  test("Check if all ships are sunk", () => {
+    gb.receiveAttack(new Coordinates("B1"));
+    gb.receiveAttack(new Coordinates("C1"));
+
+    expect(gb.allShipsSunk()).toBe(true);
+  });
 });
