@@ -1,5 +1,4 @@
 import "./style.css";
-import createBoard from "./js/frontend";
+import { setupGame } from "./js/game";
 
-createBoard();
-createBoard();
+setupGame();

@@ -15,7 +15,7 @@
 }
 
 body {
-  color: var(--Black);
+  color: var(--White);
   background-color: var(--White);
   display: flex;
   align-items: center;
@@ -23,6 +23,7 @@ body {
   min-height: 100vh;
   max-width: 850px;
   margin: 0 auto;
+  background-color: #232830;
 }
 
 p,
@@ -32,13 +33,19 @@ h3 {
   margin: 0;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
 button {
   cursor: pointer;
 }
 
-/* Template tweaks (Delete later) */
-body {
-  background-color: #232830;
+.gameboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
 }
 
 .board {
@@ -48,7 +55,6 @@ body {
 
 .column,
 .row {
-  color: white;
   align-self: center;
 }
 

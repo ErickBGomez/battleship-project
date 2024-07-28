@@ -41,17 +41,27 @@ function createCellsContainer() {
   return container;
 }
 
-function createBoard() {
+function createBoard(player) {
   const container = document.createElement("div");
-  container.classList.add("board");
+  container.classList.add("gameboard-container");
+
+  const playerName = document.createElement("h1");
+  playerName.textContent = player.name;
+
+  container.appendChild(playerName);
+
+  const board = document.createElement("div");
+  board.classList.add("board");
 
   const labelsOffset = document.createElement("div");
-  container.appendChild(labelsOffset);
+  board.appendChild(labelsOffset);
 
-  container.appendChild(createCellsContainer());
+  board.appendChild(createCellsContainer());
 
   const labels = createBoardLabels();
-  labels.forEach((label) => container.appendChild(label));
+  labels.forEach((label) => board.appendChild(label));
+
+  container.appendChild(board);
 
   document.body.appendChild(container);
 }
