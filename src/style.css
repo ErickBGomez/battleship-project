@@ -45,8 +45,23 @@ body {
   grid-template: repeat(11, 30px) / repeat(11, 30px);
 }
 
+.column,
+.row {
+  color: white;
+  align-self: center;
+}
+
+.column {
+  justify-self: center;
+}
+
+.row {
+  justify-self: end;
+  padding-right: 8px;
+}
+
 .cells {
-  grid-area: 2 / 2 /-1 / -1;
+  grid-area: 2 / 2 / -1 / -1;
   display: grid;
   grid-template: repeat(10, auto) / repeat(10, auto);
   gap: 1px;
