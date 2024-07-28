@@ -78,10 +78,14 @@ button {
   background-color: white;
 }
 
-.cell.selected {
+.cell.hit {
   background-color: gray;
 }
 
 .cell.ship {
   background-color: blue;
+}
+
+.cell.ship.hit {
+  background-color: red;
 }

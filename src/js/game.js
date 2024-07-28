@@ -6,8 +6,10 @@ import Coordinates from "./coordinates";
 const players = [];
 let currentPlayer;
 
-function selectCell(cell) {
-  cell.classList.add("selected");
+function selectCell(cell, toPlayer) {
+  const coords = new Coordinates(cell.dataset.coordinates);
+  toPlayer.gameboard.receiveAttack(coords);
+  updateBoard(toPlayer);
 }
 
 function placeShips() {

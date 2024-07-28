@@ -28,10 +28,10 @@ function updateBoard(player) {
 
   if (cells) board.removeChild(cells);
 
-  board.appendChild(setCells(player.gameboard));
+  board.appendChild(setCells(player));
 }
 
-function setCells(gameboard) {
+function setCells(player) {
   const container = document.createElement("div");
   container.classList.add("cells");
 
@@ -42,11 +42,11 @@ function setCells(gameboard) {
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
 
-      const gameCell = gameboard.board[j][i];
+      const gameCell = player.gameboard.board[j][i];
       if (gameCell.ship) cell.classList.add("ship");
       if (gameCell.hit) cell.classList.add("hit");
 
-      cell.addEventListener("click", (e) => selectCell(e.target));
+      cell.addEventListener("click", (e) => selectCell(e.target, player));
 
       container.appendChild(cell);
     }
@@ -68,7 +68,7 @@ function createBoard(player) {
   board.classList.add("board");
   board.dataset.player = player.id;
 
-  board.appendChild(setCells(player.gameboard));
+  board.appendChild(setCells(player));
 
   const labelsOffset = document.createElement("div");
   board.appendChild(labelsOffset);
