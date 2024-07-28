@@ -37,12 +37,5 @@ button {
 
 /* Template tweaks (Delete later) */
 body {
-  background-color: #272b2e;
-}
-
-.icon {
-  display: block;
-  width: 100px;
-  height: 100px;
-  opacity: 0.04;
+  background-color: #232830;
 }
