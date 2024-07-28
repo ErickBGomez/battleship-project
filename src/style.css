@@ -70,3 +70,7 @@ body {
 .cell {
   background-color: white;
 }
+
+.cell.selected {
+  background-color: gray;
+}

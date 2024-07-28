@@ -1,3 +1,5 @@
+import { selectCell } from "./game";
+
 const offset = 65;
 
 function createBoardLabels() {
@@ -30,7 +32,7 @@ function createCellsContainer() {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
-      cell.addEventListener("click", () => console.log(coordinates));
+      cell.addEventListener("click", (e) => selectCell(e.target));
 
       container.appendChild(cell);
     }
