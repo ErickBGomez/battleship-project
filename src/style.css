@@ -81,3 +81,7 @@ button {
 .cell.selected {
   background-color: gray;
 }
+
+.cell.ship {
+  background-color: blue;
+}

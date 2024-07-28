@@ -1,5 +1,7 @@
 import Player from "./player";
-import createBoard from "./frontend";
+import { createBoard, updateBoard } from "./frontend";
+import Ship from "./ship";
+import Coordinates from "./coordinates";
 
 const players = [];
 let currentPlayer;
@@ -8,11 +10,30 @@ function selectCell(cell) {
   cell.classList.add("selected");
 }
 
+function placeShips() {
+  players[0].setShips([
+    {
+      ship: new Ship(2),
+      coordinates: new Coordinates("A1"),
+      direction: "down",
+    },
+    {
+      ship: new Ship(2),
+      coordinates: new Coordinates("C3"),
+      direction: "right",
+    },
+  ]);
+
+  updateBoard(players[0]);
+}
+
 function setupGame() {
-  players.push(new Player("Player 1"));
-  players.push(new Player("Player 2"));
+  players.push(new Player("Player 1", 1));
+  players.push(new Player("Player 2", 2));
 
   players.forEach((player) => createBoard(player));
+
+  placeShips();
 }
 
 export { setupGame, selectCell };

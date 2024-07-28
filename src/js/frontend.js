@@ -22,16 +22,30 @@ function createBoardLabels() {
   return labels;
 }
 
-function createCellsContainer() {
+function updateBoard(player) {
+  const board = document.querySelector(`.board[data-player="${player.id}"]`);
+  const cells = board.querySelector(".cells");
+
+  if (cells) board.removeChild(cells);
+
+  board.appendChild(setCells(player.gameboard));
+}
+
+function setCells(gameboard) {
   const container = document.createElement("div");
   container.classList.add("cells");
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
-      const coordinates = String.fromCharCode(offset + j) + i;
+      const coordinates = String.fromCharCode(offset + j) + (i + 1);
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
+
+      const gameCell = gameboard.board[j][i];
+      if (gameCell.ship) cell.classList.add("ship");
+      if (gameCell.hit) cell.classList.add("hit");
+
       cell.addEventListener("click", (e) => selectCell(e.target));
 
       container.appendChild(cell);
@@ -52,11 +66,12 @@ function createBoard(player) {
 
   const board = document.createElement("div");
   board.classList.add("board");
+  board.dataset.player = player.id;
+
+  board.appendChild(setCells(player.gameboard));
 
   const labelsOffset = document.createElement("div");
   board.appendChild(labelsOffset);
-
-  board.appendChild(createCellsContainer());
 
   const labels = createBoardLabels();
   labels.forEach((label) => board.appendChild(label));
@@ -66,4 +81,4 @@ function createBoard(player) {
   document.body.appendChild(container);
 }
 
-export default createBoard;
+export { createBoard, updateBoard };
