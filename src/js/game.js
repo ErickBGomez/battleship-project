@@ -3,6 +3,18 @@ import { createBoard, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 
+/* TODO:
+1. Create a turn based game (possible use State Machine and Chain of Responsibility design patterns)
+2. failedHits has been being counted incorrectly. The current player doing the attack should
+    be incrementing their value, not the one receiving the attack
+3. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
+4. For Chain of Responsibility: Should check if all ships are sunk before doing the attack
+5. Drag and drop ship placement
+6. Handle errors to avoid incorrect placements
+7. Create Human and Computers players functions
+8. Display variable information in the frontend
+  */
+
 const players = [];
 let currentPlayer;
 
