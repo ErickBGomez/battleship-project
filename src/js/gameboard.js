@@ -9,8 +9,6 @@ class Gameboard {
 
   #failedHits = 0;
 
-  #ships;
-
   constructor() {
     this.#initializeBoard();
   }
