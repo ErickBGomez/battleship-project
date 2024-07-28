@@ -39,3 +39,19 @@ button {
 body {
   background-color: #232830;
 }
+
+.board {
+  display: grid;
+  grid-template: repeat(11, 30px) / repeat(11, 30px);
+}
+
+.cells {
+  grid-area: 2 / 2 /-1 / -1;
+  display: grid;
+  grid-template: repeat(10, auto) / repeat(10, auto);
+  gap: 1px;
+}
+
+.cell {
+  background-color: white;
+}
