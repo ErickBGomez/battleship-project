@@ -81,14 +81,17 @@ function createBoardInfo(gameboard) {
   const container = document.createElement("div");
   container.classList.add("info");
 
-  const failedHits = createBoardInfoLabel("Failed hits", gameboard.failedHits);
   const availableShips = createBoardInfoLabel(
     "Available ships",
     gameboard.availableShips,
   );
+  const failedHits = createBoardInfoLabel(
+    "Failed hits received",
+    gameboard.failedHits,
+  );
 
-  container.appendChild(failedHits);
   container.appendChild(availableShips);
+  container.appendChild(failedHits);
 
   return container;
 }
