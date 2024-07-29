@@ -27,13 +27,16 @@ function updateBoard(player) {
     `.gameboard-container[data-player="${player.id}"]`,
   );
   const board = gameboardContainer.querySelector(".board");
+
+  updateCells(board, player);
+  updateBoardInfo(gameboardContainer, player.gameboard);
+}
+
+function updateCells(board, player) {
   const cells = board.querySelector(".cells");
 
   if (cells) board.removeChild(cells);
-
   board.appendChild(setCells(player));
-
-  updateBoardInfo(gameboardContainer, player.gameboard);
 }
 
 function setCells(player) {
