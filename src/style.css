@@ -93,3 +93,8 @@ button {
 .cell.ship.sunk {
   background-color: black;
 }
+
+.info-container {
+  display: flex;
+  gap: 16px;
+}
