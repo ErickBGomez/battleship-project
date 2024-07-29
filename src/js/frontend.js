@@ -59,14 +59,46 @@ function setCells(player) {
   return container;
 }
 
+function createBoardInfoLabel(label, value) {
+  const container = document.createElement("div");
+  container.classList.add("info-container");
+
+  const labelElement = document.createElement("p");
+  labelElement.classList.add("label");
+  labelElement.textContent = `${label}: `;
+
+  const valueElement = document.createElement("p");
+  valueElement.classList.add("value");
+  valueElement.textContent = value;
+
+  container.appendChild(labelElement);
+  container.appendChild(valueElement);
+
+  return container;
+}
+
+function createBoardInfo(gameboard) {
+  const container = document.createElement("div");
+  container.classList.add("info");
+
+  const failedHits = createBoardInfoLabel("Failed hits", gameboard.failedHits);
+  const availableShips = createBoardInfoLabel(
+    "Available ships",
+    gameboard.availableShips,
+  );
+
+  container.appendChild(failedHits);
+  container.appendChild(availableShips);
+
+  return container;
+}
+
 function createBoard(player) {
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
 
   const playerName = document.createElement("h1");
   playerName.textContent = player.name;
-
-  container.appendChild(playerName);
 
   const board = document.createElement("div");
   board.classList.add("board");
@@ -80,7 +112,11 @@ function createBoard(player) {
   const labels = createBoardLabels();
   labels.forEach((label) => board.appendChild(label));
 
+  const info = createBoardInfo(player.gameboard);
+
+  container.appendChild(playerName);
   container.appendChild(board);
+  container.appendChild(info);
 
   document.body.appendChild(container);
 }
