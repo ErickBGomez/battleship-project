@@ -23,12 +23,17 @@ function createBoardLabels() {
 }
 
 function updateBoard(player) {
-  const board = document.querySelector(`.board[data-player="${player.id}"]`);
+  const gameboardContainer = document.querySelector(
+    `.gameboard-container[data-player="${player.id}"]`,
+  );
+  const board = gameboardContainer.querySelector(".board");
   const cells = board.querySelector(".cells");
 
   if (cells) board.removeChild(cells);
 
   board.appendChild(setCells(player));
+
+  updateBoardInfo(gameboardContainer, player.gameboard);
 }
 
 function setCells(player) {
@@ -59,9 +64,10 @@ function setCells(player) {
   return container;
 }
 
-function createBoardInfoLabel(label, value) {
+function createBoardInfoLabel(className, label, value) {
   const container = document.createElement("div");
   container.classList.add("info-container");
+  container.classList.add(className);
 
   const labelElement = document.createElement("p");
   labelElement.classList.add("label");
@@ -82,10 +88,12 @@ function createBoardInfo(gameboard) {
   container.classList.add("info");
 
   const availableShips = createBoardInfoLabel(
+    "available-ships",
     "Available ships",
     gameboard.availableShips,
   );
   const failedHits = createBoardInfoLabel(
+    "failed-hits",
     "Failed hits received",
     gameboard.failedHits,
   );
@@ -96,16 +104,24 @@ function createBoardInfo(gameboard) {
   return container;
 }
 
+function updateBoardInfo(container, gameboard) {
+  const failedHits = container.querySelector(".failed-hits .value");
+  const availableShips = container.querySelector(".available-ships .value");
+
+  failedHits.textContent = gameboard.failedHits;
+  availableShips.textContent = gameboard.availableShips;
+}
+
 function createBoard(player) {
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
+  container.dataset.player = player.id;
 
   const playerName = document.createElement("h1");
   playerName.textContent = player.name;
 
   const board = document.createElement("div");
   board.classList.add("board");
-  board.dataset.player = player.id;
 
   board.appendChild(setCells(player));
 
