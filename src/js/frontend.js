@@ -1,6 +1,8 @@
 import Coordinates from "./coordinates";
+// import Game from "./game";
 
 const offset = 65;
+// const game = Game.instance;
 
 function createBoardLabels() {
   const labels = [];
@@ -20,6 +22,13 @@ function createBoardLabels() {
   }
 
   return labels;
+}
+
+function handleClick(cell, player) {
+  const coords = new Coordinates(cell.dataset.coordinates);
+  player.gameboard.receiveAttack(coords);
+  updateBoard(player);
+  // Swap player
 }
 
 function updateBoard(player, state) {
@@ -57,15 +66,9 @@ function updateCells(board, player, state) {
     if (gameCell.hit) cell.classList.add("hit");
 
     if (state === "receiving") {
-      cell.addEventListener("click", () => console.log("you clicked me!"));
+      cell.addEventListener("click", (e) => handleClick(e.target, player));
     }
   });
-}
-
-function cellEvent(cell, toPlayer) {
-  const coords = new Coordinates(cell.dataset.coordinates);
-  toPlayer.gameboard.receiveAttack(coords);
-  updateBoard(toPlayer);
 }
 
 function setCells(player) {
