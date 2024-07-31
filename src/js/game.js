@@ -17,6 +17,9 @@ import Coordinates from "./coordinates";
 
 const players = [];
 let currentPlayer;
+let nextPlayer;
+let playerFlag = false;
+let state;
 
 function selectCell(cell, toPlayer) {
   const coords = new Coordinates(cell.dataset.coordinates);
@@ -86,13 +89,24 @@ function placeShips() {
   updateBoard(players[1]);
 }
 
+function startTurn(player) {
+  currentPlayer = player;
+
+  setUpEventListeners(player);
+}
+
 function setupGame() {
   players.push(new Player("Player 1", 1));
   players.push(new Player("Player 2", 2));
 
   players.forEach((player) => createBoard(player));
 
+  // Set state to "Placing ships"
   placeShips();
+
+  // Should be called when "Placing ships is finished"
+  // Set state to "Attacking"
+  startTurn();
 }
 
 export { setupGame, selectCell };

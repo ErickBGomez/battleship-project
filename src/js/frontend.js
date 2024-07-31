@@ -1,4 +1,4 @@
-import { selectCell } from "./game";
+import Coordinates from "./coordinates";
 
 const offset = 65;
 
@@ -39,6 +39,12 @@ function updateCells(board, player) {
   board.appendChild(setCells(player));
 }
 
+function selectCell(cell, toPlayer) {
+  const coords = new Coordinates(cell.dataset.coordinates);
+  toPlayer.gameboard.receiveAttack(coords);
+  updateBoard(toPlayer);
+}
+
 function setCells(player) {
   const container = document.createElement("div");
   container.classList.add("cells");
@@ -58,6 +64,7 @@ function setCells(player) {
 
       if (gameCell.hit) cell.classList.add("hit");
 
+      // Event listeners should be called when setting up the turn. Not when the board is updating
       cell.addEventListener("click", (e) => selectCell(e.target, player));
 
       container.appendChild(cell);
