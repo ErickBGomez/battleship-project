@@ -22,29 +22,43 @@ function createBoardLabels() {
   return labels;
 }
 
-function updateBoard(player) {
+function updateBoard(player, state) {
   const gameboardContainer = document.querySelector(
     `.gameboard-container[data-player="${player.id}"]`,
   );
   const board = gameboardContainer.querySelector(".board");
 
-  updateCells(board, player);
+  updateCells(board, player, state);
   updateBoardInfo(gameboardContainer, player.gameboard);
 }
 
-function updateCells(board, player) {
+function updateCells(board, player, state) {
   const cells = board.querySelectorAll(".cell");
 
-  cells.forEach((cell) => {
+  cells.forEach((cl) => {
+    // Remove event
+    const cell = cl.cloneNode(true);
+    cl.parentNode.replaceChild(cell, cl);
+
     const gameCell = player.gameboard.getCellByCoordinates(
       new Coordinates(cell.dataset.coordinates),
     );
+
+    // Reset class list
+    cell.className = "cell";
+
     if (gameCell.ship) {
-      cell.classList.add("ship");
+      if (state === "attacking" || state === "placing") {
+        cell.classList.add("ship");
+      }
       if (gameCell.ship.isSunk()) cell.classList.add("sunk");
     }
 
     if (gameCell.hit) cell.classList.add("hit");
+
+    if (state === "receiving") {
+      cell.addEventListener("click", () => console.log("you clicked me!"));
+    }
   });
 }
 

@@ -63,7 +63,7 @@ class Game {
       },
     ]);
 
-    updateBoard(this.#players[0]);
+    updateBoard(this.#players[0], "placing");
 
     this.#players[1].setShips([
       {
@@ -93,7 +93,7 @@ class Game {
       },
     ]);
 
-    updateBoard(this.#players[1]);
+    updateBoard(this.#players[1], "placing");
   }
 
   #playTurn() {}
