@@ -49,7 +49,7 @@ class Gameboard {
     return this.#board[column][row];
   }
 
-  #getCellByCoordinates(coordinates) {
+  getCellByCoordinates(coordinates) {
     return this.#board[coordinates.columnIndex][coordinates.rowIndex];
   }
 
@@ -144,7 +144,7 @@ class Gameboard {
       throw new OutOfBoundsError("Attack coordinates is out of bounds");
     }
 
-    const currentCell = this.#getCellByCoordinates(coordinates);
+    const currentCell = this.getCellByCoordinates(coordinates);
 
     if (currentCell.hit) {
       throw new Error("Cell has been hit before");

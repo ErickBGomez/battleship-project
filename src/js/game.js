@@ -96,6 +96,8 @@ class Game {
     updateBoard(this.#players[1]);
   }
 
+  #playTurn() {}
+
   setupGame() {
     this.#players.push(new Player("Player 1", 1));
     this.#players.push(new Player("Player 2", 2));
@@ -105,6 +107,7 @@ class Game {
     // Set state to "Placing ships"
     this.#placeShips();
 
+    this.#playTurn();
     // Should be called when "Placing ships is finished"
     // Set state to "Attacking"
   }

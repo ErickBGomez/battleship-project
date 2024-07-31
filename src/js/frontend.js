@@ -33,13 +33,22 @@ function updateBoard(player) {
 }
 
 function updateCells(board, player) {
-  const cells = board.querySelector(".cells");
+  const cells = board.querySelectorAll(".cell");
 
-  if (cells) board.removeChild(cells);
-  board.appendChild(setCells(player));
+  cells.forEach((cell) => {
+    const gameCell = player.gameboard.getCellByCoordinates(
+      new Coordinates(cell.dataset.coordinates),
+    );
+    if (gameCell.ship) {
+      cell.classList.add("ship");
+      if (gameCell.ship.isSunk()) cell.classList.add("sunk");
+    }
+
+    if (gameCell.hit) cell.classList.add("hit");
+  });
 }
 
-function selectCell(cell, toPlayer) {
+function cellEvent(cell, toPlayer) {
   const coords = new Coordinates(cell.dataset.coordinates);
   toPlayer.gameboard.receiveAttack(coords);
   updateBoard(toPlayer);
@@ -56,16 +65,8 @@ function setCells(player) {
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
 
-      const gameCell = player.gameboard.board[j][i];
-      if (gameCell.ship) {
-        cell.classList.add("ship");
-        if (gameCell.ship.isSunk()) cell.classList.add("sunk");
-      }
-
-      if (gameCell.hit) cell.classList.add("hit");
-
       // Event listeners should be called when setting up the turn. Not when the board is updating
-      cell.addEventListener("click", (e) => selectCell(e.target, player));
+      // cell.addEventListener("click", (e) => selectCell(e.target, player));
 
       container.appendChild(cell);
     }
