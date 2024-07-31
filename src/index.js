@@ -1,5 +1,4 @@
 import "./style.css";
-import Game from "./js/game";
+import { startGame } from "./js/gamemediator";
 
-const game = new Game();
-game.setupGame();
+startGame();

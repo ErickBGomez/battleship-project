@@ -20,7 +20,14 @@ class Game {
 
   #playerFlag = false;
 
-  #state;
+  constructor() {
+    this.#players.push(new Player("Player 1", 1));
+    this.#players.push(new Player("Player 2", 2));
+  }
+
+  get players() {
+    return this.#players;
+  }
 
   get currentPlayer() {
     return this.#players[Number(this.#playerFlag)];
@@ -34,7 +41,7 @@ class Game {
     this.#playerFlag = !this.#playerFlag;
   }
 
-  #placeShips() {
+  placeShips() {
     this.#players[0].setShips([
       {
         ship: new Ship(2),
@@ -96,21 +103,18 @@ class Game {
     updateBoard(this.#players[1], "placing");
   }
 
-  #playTurn() {
+  playTurn() {
     updateBoard(this.currentPlayer, "attacking");
     updateBoard(this.nextPlayer, "receiving");
   }
 
   setupGame() {
-    this.#players.push(new Player("Player 1", 1));
-    this.#players.push(new Player("Player 2", 2));
-
     this.#players.forEach((player) => createBoard(player));
 
     // Set state to "Placing ships"
-    this.#placeShips();
+    this.placeShips();
 
-    this.#playTurn();
+    this.playTurn();
     // Should be called when "Placing ships is finished"
     // Set state to "Attacking"
   }
