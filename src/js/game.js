@@ -96,7 +96,10 @@ class Game {
     updateBoard(this.#players[1], "placing");
   }
 
-  #playTurn() {}
+  #playTurn() {
+    updateBoard(this.currentPlayer, "attacking");
+    updateBoard(this.nextPlayer, "receiving");
+  }
 
   setupGame() {
     this.#players.push(new Player("Player 1", 1));
