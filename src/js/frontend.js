@@ -25,6 +25,7 @@ function createBoardLabels() {
 function handleClick(cell, player) {
   const coords = new Coordinates(cell.dataset.coordinates);
   player.gameboard.receiveAttack(coords);
+  // Play new turn instead of updating
   updateBoard(player);
   // Swap player
 }
