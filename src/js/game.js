@@ -70,8 +70,6 @@ class Game {
       },
     ]);
 
-    updateBoard(this.#players[0], "placing");
-
     this.#players[1].setShips([
       {
         ship: new Ship(2),
@@ -99,8 +97,6 @@ class Game {
         direction: "right",
       },
     ]);
-
-    updateBoard(this.#players[1], "placing");
   }
 
   playTurn() {
