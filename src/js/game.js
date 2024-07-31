@@ -18,15 +18,23 @@ import Coordinates from "./coordinates";
 class Game {
   #players = [];
 
-  #currentPlayer;
-
-  #nextPlayer;
-
   #playerFlag = false;
 
   #state;
 
-  placeShips() {
+  get currentPlayer() {
+    return this.#players[Number(this.#playerFlag)];
+  }
+
+  get nextPlayer() {
+    return this.#players[Number(!this.#playerFlag)];
+  }
+
+  #swapNextPlayer() {
+    this.#playerFlag = !this.#playerFlag;
+  }
+
+  #placeShips() {
     this.#players[0].setShips([
       {
         ship: new Ship(2),
@@ -95,11 +103,10 @@ class Game {
     this.#players.forEach((player) => createBoard(player));
 
     // Set state to "Placing ships"
-    this.placeShips();
+    this.#placeShips();
 
     // Should be called when "Placing ships is finished"
     // Set state to "Attacking"
-    this.startTurn();
   }
 }
 
