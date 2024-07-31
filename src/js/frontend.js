@@ -1,8 +1,6 @@
 import Coordinates from "./coordinates";
-// import Game from "./game";
 
 const offset = 65;
-// const game = Game.instance;
 
 function createBoardLabels() {
   const labels = [];
