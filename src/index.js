@@ -1,4 +1,5 @@
 import "./style.css";
-import { setupGame } from "./js/game";
+import Game from "./js/game";
 
-setupGame();
+const game = new Game();
+game.setupGame();
