@@ -103,11 +103,16 @@ class Game {
     ]);
   }
 
-  #handleTurn() {
+  #handleTurn(cell) {
     if (this.#checkWin()) {
       console.log("Game over!");
       return;
     }
+
+    const coords = new Coordinates(cell.dataset.coordinates);
+    this.nextPlayer.gameboard.receiveAttack(coords);
+
+    updateBoard(this.nextPlayer);
 
     this.#swapNextPlayer();
     this.playTurn();
@@ -117,7 +122,7 @@ class Game {
     const cells = getBoardCells(player);
 
     cells.forEach((cell) => {
-      cell.addEventListener("click", () => this.#handleTurn());
+      cell.addEventListener("click", (e) => this.#handleTurn(e.target));
     });
   }
 
