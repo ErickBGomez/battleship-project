@@ -116,7 +116,10 @@ class Game {
 
       updateBoard(this.nextPlayer);
 
-      this.#swapNextPlayer();
+      if (!this.nextPlayer.gameboard.cellContainsShip(coords)) {
+        this.#swapNextPlayer();
+      }
+
       this.playTurn();
     } catch (error) {
       console.error(error.message);

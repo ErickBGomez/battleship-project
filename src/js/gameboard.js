@@ -167,6 +167,10 @@ class Gameboard {
   allShipsSunk() {
     return this.#availableShips === 0;
   }
+
+  cellContainsShip(coords) {
+    return this.getCellByCoordinates(coords).ship !== null;
+  }
 }
 
 export default Gameboard;
