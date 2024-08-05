@@ -2,34 +2,6 @@ import Coordinates from "./coordinates";
 
 const offset = 65;
 
-function createBoardLabels() {
-  const labels = [];
-
-  for (let i = 0; i < 10; i++) {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.textContent = String.fromCharCode(offset + i);
-    labels.push(column);
-  }
-
-  for (let i = 1; i <= 10; i++) {
-    const row = document.createElement("div");
-    row.classList.add("row");
-    row.textContent = i;
-    labels.push(row);
-  }
-
-  return labels;
-}
-
-function handleClick(cell, player) {
-  const coords = new Coordinates(cell.dataset.coordinates);
-  player.gameboard.receiveAttack(coords);
-  // Play new turn instead of updating
-  updateBoard(player);
-  // Swap player
-}
-
 function updateBoard(player, state) {
   const gameboardContainer = document.querySelector(
     `.gameboard-container[data-player="${player.id}"]`,
@@ -65,7 +37,7 @@ function updateCells(board, player, state) {
     if (gameCell.hit) cell.classList.add("hit");
 
     if (state === "receiving") {
-      cell.addEventListener("click", (e) => handleClick(e.target, player));
+      // cell.addEventListener("click", (e) => handleClick(e.target, player));
     }
   });
 }
@@ -137,6 +109,26 @@ function updateBoardInfo(container, gameboard) {
 
   failedHits.textContent = gameboard.failedHits;
   availableShips.textContent = gameboard.availableShips;
+}
+
+function createBoardLabels() {
+  const labels = [];
+
+  for (let i = 0; i < 10; i++) {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.textContent = String.fromCharCode(offset + i);
+    labels.push(column);
+  }
+
+  for (let i = 1; i <= 10; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    row.textContent = i;
+    labels.push(row);
+  }
+
+  return labels;
 }
 
 function createBoard(player) {
