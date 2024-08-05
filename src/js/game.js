@@ -100,18 +100,16 @@ class Game {
   }
 
   #handleTurn(cell) {
-    // Note: Game over triggers after the next click when all ships were sunk.
-    // Should be at the start of the round
-    if (this.#checkWin()) {
-      console.log("Game over!");
-      return;
-    }
-
     try {
       const coords = new Coordinates(cell.dataset.coordinates);
       this.nextPlayer.gameboard.receiveAttack(coords);
 
       updateBoard(this.nextPlayer);
+
+      if (this.#checkWin()) {
+        console.log("Game over!");
+        return;
+      }
 
       if (!this.nextPlayer.gameboard.cellContainsShip(coords)) {
         this.#swapNextPlayer();
