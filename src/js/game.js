@@ -5,15 +5,10 @@ import Coordinates from "./coordinates";
 import InvalidCoordinatesError from "./errors/invalidCoordinatesError";
 
 /* TODO:
-1. Create a turn based game (possible use State Machine and Chain of Responsibility design patterns)
-2. failedHits has been being counted incorrectly. The current player doing the attack should
-    be incrementing their value, not the one receiving the attack
-3. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
-4. For Chain of Responsibility: Should check if all ships are sunk before doing the attack
-5. Drag and drop ship placement
-6. Handle errors to avoid incorrect placements
-7. Create Human and Computers players functions
-8. Display variable information in the frontend
+1. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
+2. Drag and drop ship placement
+3. Handle errors to avoid incorrect placements
+4. Create Human and Computers players functions
   */
 
 class Game {
@@ -105,7 +100,8 @@ class Game {
   }
 
   #handleTurn(cell) {
-    // TODO: Game over triggers after the next click when all ships were sunk. Should be at the start of the round
+    // Note: Game over triggers after the next click when all ships were sunk.
+    // Should be at the start of the round
     if (this.#checkWin()) {
       console.log("Game over!");
       return;
