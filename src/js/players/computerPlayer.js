@@ -1,3 +1,4 @@
+import Coordinates from "../coordinates";
 import Player from "./player";
 
 class ComputerPlayer extends Player {
@@ -7,6 +8,10 @@ class ComputerPlayer extends Player {
 
   getRandomCoordinates() {
     const column = this.#randomRange(0, 9);
+    const row = this.#randomRange(0, 9);
+    const coordsValue = Coordinates.convert(column, row);
+
+    return new Coordinates(coordsValue);
   }
 }
 
