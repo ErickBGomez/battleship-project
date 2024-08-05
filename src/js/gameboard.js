@@ -1,6 +1,7 @@
 import Coordinates from "./coordinates";
 import ShipPlacementError from "./errors/shipPlacementError";
 import OutOfBoundsError from "./errors/outOfBoundsError";
+import CellHitError from "./errors/cellHitError";
 
 class Gameboard {
   #board;
@@ -147,7 +148,7 @@ class Gameboard {
     const currentCell = this.getCellByCoordinates(coordinates);
 
     if (currentCell.hit) {
-      throw new Error("Cell has been hit before");
+      throw new CellHitError("Cell has been hit before");
     }
 
     if (!this.isCellAvailable(coordinates)) {
