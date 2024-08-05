@@ -2,6 +2,7 @@ import Player from "./player";
 import { createBoard, getBoardCells, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
+import InvalidCoordinatesError from "./errors/invalidCoordinatesError";
 
 /* TODO:
 1. Create a turn based game (possible use State Machine and Chain of Responsibility design patterns)
@@ -109,13 +110,17 @@ class Game {
       return;
     }
 
-    const coords = new Coordinates(cell.dataset.coordinates);
-    this.nextPlayer.gameboard.receiveAttack(coords);
+    try {
+      const coords = new Coordinates(cell.dataset.coordinates);
+      this.nextPlayer.gameboard.receiveAttack(coords);
 
-    updateBoard(this.nextPlayer);
+      updateBoard(this.nextPlayer);
 
-    this.#swapNextPlayer();
-    this.playTurn();
+      this.#swapNextPlayer();
+      this.playTurn();
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   #setEvents(player) {
