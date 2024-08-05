@@ -16,9 +16,14 @@ class Game {
 
   #playerFlag = false;
 
-  constructor() {
-    this.#players.push(new Player("Player", 1));
-    this.#players.push(new ComputerPlayer("CPU", 2));
+  constructor(vsComputer) {
+    if (vsComputer) {
+      this.#players.push(new Player("Player", 1));
+      this.#players.push(new ComputerPlayer("CPU", 2));
+    } else {
+      this.#players.push(new Player("Player 1", 1));
+      this.#players.push(new Player("Player 2", 2));
+    }
   }
 
   get players() {
