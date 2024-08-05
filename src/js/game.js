@@ -2,6 +2,7 @@ import Player from "./players/player";
 import { createBoard, getBoardCells, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
+import ComputerPlayer from "./players/computerPlayer";
 
 /* TODO:
 1. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
@@ -16,8 +17,8 @@ class Game {
   #playerFlag = false;
 
   constructor() {
-    this.#players.push(new Player("Player 1", 1));
-    this.#players.push(new Player("Player 2", 2));
+    this.#players.push(new Player("Player", 1));
+    this.#players.push(new ComputerPlayer("CPU", 2));
   }
 
   get players() {
@@ -98,9 +99,9 @@ class Game {
     ]);
   }
 
-  #handleTurn(cell) {
+  #handleTurn(coordinates) {
     try {
-      const coords = new Coordinates(cell.dataset.coordinates);
+      const coords = new Coordinates(coordinates);
       this.nextPlayer.gameboard.receiveAttack(coords);
 
       updateBoard(this.nextPlayer);
@@ -124,7 +125,9 @@ class Game {
     const cells = getBoardCells(player);
 
     cells.forEach((cell) => {
-      cell.addEventListener("click", (e) => this.#handleTurn(e.target));
+      cell.addEventListener("click", (e) => {
+        this.#handleTurn(e.target.dataset.coordinates);
+      });
     });
   }
 
