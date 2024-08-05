@@ -6,12 +6,10 @@ class ComputerPlayer extends Player {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  getRandomCoordinates() {
+  selectRandomCoordinates() {
     const column = this.#randomRange(0, 9);
     const row = this.#randomRange(0, 9);
-    const coordsValue = Coordinates.convert(column, row);
-
-    return new Coordinates(coordsValue);
+    return Coordinates.convert(column, row);
   }
 }
 

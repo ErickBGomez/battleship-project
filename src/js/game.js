@@ -101,8 +101,7 @@ class Game {
 
   #handleTurn(coordinates) {
     try {
-      const coords = new Coordinates(coordinates);
-      this.nextPlayer.gameboard.receiveAttack(coords);
+      this.nextPlayer.gameboard.receiveAttack(coordinates);
 
       updateBoard(this.nextPlayer);
 
@@ -111,7 +110,7 @@ class Game {
         return;
       }
 
-      if (!this.nextPlayer.gameboard.cellContainsShip(coords)) {
+      if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
         this.#swapNextPlayer();
       }
 
@@ -126,7 +125,7 @@ class Game {
 
     cells.forEach((cell) => {
       cell.addEventListener("click", (e) => {
-        this.#handleTurn(e.target.dataset.coordinates);
+        this.#handleTurn(new Coordinates(e.target.dataset.coordinates));
       });
     });
   }
@@ -138,7 +137,13 @@ class Game {
     updateBoard(this.currentPlayer);
     updateBoard(this.nextPlayer);
 
-    this.#setEvents(this.nextPlayer);
+    if (this.currentPlayer instanceof ComputerPlayer) {
+      this.#handleTurn(
+        new Coordinates(this.currentPlayer.selectRandomCoordinates()),
+      );
+    } else {
+      this.#setEvents(this.nextPlayer);
+    }
   }
 
   setupGame() {
