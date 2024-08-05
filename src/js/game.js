@@ -1,8 +1,7 @@
-import Player from "./player";
+import Player from "./players/player";
 import { createBoard, getBoardCells, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
-import InvalidCoordinatesError from "./errors/invalidCoordinatesError";
 
 /* TODO:
 1. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
