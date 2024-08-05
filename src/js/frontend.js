@@ -34,17 +34,17 @@ function updateCells(board, player) {
     cell.className = "cell";
 
     if (gameCell.ship) {
-      if (player.state === "attacking" || player.state === "placing") {
+      if (
+        player.state === "attacking" ||
+        player.state === "placing" ||
+        gameCell.hit
+      ) {
         cell.classList.add("ship");
       }
       if (gameCell.ship.isSunk()) cell.classList.add("sunk");
     }
 
     if (gameCell.hit) cell.classList.add("hit");
-
-    if (player.state === "receiving") {
-      // cell.addEventListener("click", (e) => handleClick(e.target, player));
-    }
   });
 }
 
