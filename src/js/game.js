@@ -107,7 +107,7 @@ class Game {
       updateBoard(this.nextPlayer);
 
       if (this.#checkWin()) {
-        console.log("Game over!");
+        alert("Game over!");
         return;
       }
 
