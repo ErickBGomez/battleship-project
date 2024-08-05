@@ -11,6 +11,7 @@ class Player {
     this.#gameboard = new Gameboard();
     this.#name = name;
     this.#id = id;
+    this.state = "waiting";
   }
 
   get name() {

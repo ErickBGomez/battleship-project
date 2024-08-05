@@ -1,5 +1,5 @@
 import Player from "./player";
-import { createBoard, updateBoard } from "./frontend";
+import { createBoard, getBoardCells, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 
@@ -39,6 +39,10 @@ class Game {
 
   #swapNextPlayer() {
     this.#playerFlag = !this.#playerFlag;
+  }
+
+  #checkWin() {
+    return this.nextPlayer.gameboard.allShipsSunk();
   }
 
   placeShips() {
@@ -99,9 +103,32 @@ class Game {
     ]);
   }
 
+  #handleTurn() {
+    if (this.#checkWin()) {
+      console.log("Game over!");
+      return;
+    }
+
+    this.#swapNextPlayer();
+    this.playTurn();
+  }
+
+  #setEvents(player) {
+    const cells = getBoardCells(player);
+
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => this.#handleTurn());
+    });
+  }
+
   playTurn() {
-    updateBoard(this.currentPlayer, "attacking");
-    updateBoard(this.nextPlayer, "receiving");
+    this.currentPlayer.state = "attacking";
+    this.nextPlayer.state = "receiving";
+
+    updateBoard(this.currentPlayer);
+    updateBoard(this.nextPlayer);
+
+    this.#setEvents(this.nextPlayer);
   }
 
   setupGame() {

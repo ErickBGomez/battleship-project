@@ -2,17 +2,23 @@ import Coordinates from "./coordinates";
 
 const offset = 65;
 
-function updateBoard(player, state) {
+function getBoardCells(player) {
+  return document.querySelectorAll(
+    `.gameboard-container[data-player="${player.id}"] .cell`,
+  );
+}
+
+function updateBoard(player) {
   const gameboardContainer = document.querySelector(
     `.gameboard-container[data-player="${player.id}"]`,
   );
   const board = gameboardContainer.querySelector(".board");
 
-  updateCells(board, player, state);
+  updateCells(board, player, player.state);
   updateBoardInfo(gameboardContainer, player.gameboard);
 }
 
-function updateCells(board, player, state) {
+function updateCells(board, player) {
   const cells = board.querySelectorAll(".cell");
 
   cells.forEach((cl) => {
@@ -28,7 +34,7 @@ function updateCells(board, player, state) {
     cell.className = "cell";
 
     if (gameCell.ship) {
-      if (state === "attacking" || state === "placing") {
+      if (player.state === "attacking" || player.state === "placing") {
         cell.classList.add("ship");
       }
       if (gameCell.ship.isSunk()) cell.classList.add("sunk");
@@ -36,7 +42,7 @@ function updateCells(board, player, state) {
 
     if (gameCell.hit) cell.classList.add("hit");
 
-    if (state === "receiving") {
+    if (player.state === "receiving") {
       // cell.addEventListener("click", (e) => handleClick(e.target, player));
     }
   });
@@ -159,4 +165,4 @@ function createBoard(player) {
   document.body.appendChild(container);
 }
 
-export { createBoard, updateBoard };
+export { createBoard, updateBoard, getBoardCells };
