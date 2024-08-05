@@ -37,6 +37,16 @@ class Coordinates {
   }
 
   static convert(column, row) {
+    if (column < 0 || row < 0) {
+      throw new InvalidCoordinatesError(
+        "Cannot convert negative values for columns or rows",
+      );
+    } else if (typeof column === "string" || typeof row === "string") {
+      throw new InvalidCoordinatesError(
+        "Cannot convert string values for columns or rows",
+      );
+    }
+
     const columnChar = String.fromCharCode(column + 65);
     return columnChar + (row + 1);
   }

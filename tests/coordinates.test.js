@@ -55,4 +55,20 @@ describe("Coordinates conversion tests", () => {
   test("column 9 and row 9 should return J10", () => {
     expect(Coordinates.convert(9, 9)).toBe("J10");
   });
+
+  test("Cannot convert negative values", () => {
+    expect(() => Coordinates.convert(-1, -1)).toThrow(InvalidCoordinatesError);
+  });
+
+  test("Cannot convert string values", () => {
+    expect(() => Coordinates.convert("A", "A")).toThrow(
+      InvalidCoordinatesError,
+    );
+  });
+
+  test("Cannot convert string values", () => {
+    expect(() => Coordinates.convert("1", "1")).toThrow(
+      InvalidCoordinatesError,
+    );
+  });
 });
