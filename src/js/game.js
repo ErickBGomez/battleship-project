@@ -130,6 +130,21 @@ class Game {
     });
   }
 
+  #tryComputerSelection() {
+    if (!(this.currentPlayer instanceof ComputerPlayer)) return;
+
+    let cellHit;
+    let coords;
+
+    // Try getting a valid coordinate selection before handling the turn
+    do {
+      coords = new Coordinates(this.currentPlayer.selectRandomCoordinates());
+      cellHit = this.nextPlayer.gameboard.getCellByCoordinates(coords).hit;
+    } while (cellHit);
+
+    this.#handleTurn(coords);
+  }
+
   playTurn() {
     this.currentPlayer.state = "attacking";
     this.nextPlayer.state = "receiving";
@@ -138,9 +153,7 @@ class Game {
     updateBoard(this.nextPlayer);
 
     if (this.currentPlayer instanceof ComputerPlayer) {
-      this.#handleTurn(
-        new Coordinates(this.currentPlayer.selectRandomCoordinates()),
-      );
+      this.#tryComputerSelection();
     } else {
       this.#setEvents(this.nextPlayer);
     }
