@@ -46,3 +46,13 @@ describe("Coordinates tests", () => {
     expect(() => new Coordinates("A10A")).toThrow(InvalidCoordinatesError);
   });
 });
+
+describe("Coordinates conversion tests", () => {
+  test("column 0 and row 0 should return A1", () => {
+    expect(Coordinates.convert(0, 0)).toBe("A1");
+  });
+
+  test("column 9 and row 9 should return J10", () => {
+    expect(Coordinates.convert(9, 9)).toBe("J10");
+  });
+});

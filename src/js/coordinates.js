@@ -35,6 +35,11 @@ class Coordinates {
     const pattern = /^[A-Z][1-9]\d*$/;
     return pattern.test(coordinates);
   }
+
+  static convert(column, row) {
+    const columnChar = String.fromCharCode(column + 65);
+    return columnChar + (row + 1);
+  }
 }
 
 export default Coordinates;
