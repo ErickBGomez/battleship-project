@@ -105,6 +105,7 @@ class Game {
   }
 
   #handleTurn(cell) {
+    // TODO: Game over triggers after the next click when all ships were sunk. Should be at the start of the round
     if (this.#checkWin()) {
       console.log("Game over!");
       return;
@@ -151,8 +152,6 @@ class Game {
     this.placeShips();
 
     this.playTurn();
-    // Should be called when "Placing ships is finished"
-    // Set state to "Attacking"
   }
 }
 
