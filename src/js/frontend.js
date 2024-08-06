@@ -22,7 +22,7 @@ function updateCells(board, player) {
   const cells = board.querySelectorAll(".cell");
 
   cells.forEach((cl) => {
-    // Remove event
+    // Remove events
     const cell = cl.cloneNode(true);
     cl.parentNode.replaceChild(cell, cl);
 
@@ -48,7 +48,7 @@ function updateCells(board, player) {
   });
 }
 
-function setCells(player) {
+function setCells() {
   const container = document.createElement("div");
   container.classList.add("cells");
 
@@ -58,9 +58,6 @@ function setCells(player) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
-
-      // Event listeners should be called when setting up the turn. Not when the board is updating
-      // cell.addEventListener("click", (e) => selectCell(e.target, player));
 
       container.appendChild(cell);
     }
