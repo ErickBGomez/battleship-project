@@ -134,6 +134,19 @@ function createBoardLabels() {
   return labels;
 }
 
+function createButtons() {
+  const container = document.createElement("div");
+  container.classList.add("buttons");
+
+  const confirmButton = document.createElement("button");
+  confirmButton.classList.add("confirm");
+  confirmButton.textContent = "Confirm";
+
+  container.appendChild(confirmButton);
+
+  return container;
+}
+
 function createBoard(player) {
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
@@ -155,9 +168,12 @@ function createBoard(player) {
 
   const info = createBoardInfo(player.gameboard);
 
+  const buttons = createButtons();
+
   container.appendChild(playerName);
   container.appendChild(board);
   container.appendChild(info);
+  container.appendChild(buttons);
 
   document.body.appendChild(container);
 }
