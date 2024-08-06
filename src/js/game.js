@@ -152,7 +152,7 @@ class Game {
 
   playTurn() {
     this.currentPlayer.state = "attacking";
-    this.nextPlayer.state = "receiving";
+    this.nextPlayer.state = "waiting";
 
     updateBoard(this.currentPlayer);
     updateBoard(this.nextPlayer);
