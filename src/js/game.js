@@ -18,11 +18,11 @@ class Game {
 
   constructor(vsComputer) {
     if (vsComputer) {
-      this.#players.push(new Player("Player", 1));
-      this.#players.push(new ComputerPlayer("CPU", 2));
+      this.#players.push(new Player(1, "Player"));
+      this.#players.push(new ComputerPlayer(2, "CPU"));
     } else {
-      this.#players.push(new Player("Player 1", 1));
-      this.#players.push(new Player("Player 2", 2));
+      this.#players.push(new Player(1, "Player 1"));
+      this.#players.push(new Player(2, "Player 2"));
     }
   }
 

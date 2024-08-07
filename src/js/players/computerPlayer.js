@@ -5,8 +5,8 @@ import { randomRange } from "../utils";
 class ComputerPlayer extends Player {
   #difficulty;
 
-  constructor(name, id, difficulty) {
-    super(name, id);
+  constructor(id, name, difficulty) {
+    super(id, name);
 
     this.#difficulty = difficulty;
   }

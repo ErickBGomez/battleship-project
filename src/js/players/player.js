@@ -3,14 +3,14 @@ import Gameboard from "../gameboard";
 class Player {
   #gameboard;
 
-  #name;
-
   #id;
 
-  constructor(name, id) {
+  #name;
+
+  constructor(id, name) {
     this.#gameboard = new Gameboard();
-    this.#name = name;
     this.#id = id;
+    this.#name = name;
     this.state = "waiting";
   }
 
