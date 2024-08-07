@@ -19,7 +19,7 @@ class Game {
   constructor(vsComputer) {
     if (vsComputer) {
       this.#players.push(new Player(1, "Player"));
-      this.#players.push(new ComputerPlayer(2, "CPU"));
+      this.#players.push(new ComputerPlayer(2, "CPU", "easy"));
     } else {
       this.#players.push(new Player(1, "Player 1"));
       this.#players.push(new Player(2, "Player 2"));
@@ -87,7 +87,7 @@ class Game {
 
     // Try getting a valid coordinate selection before handling the turn
     do {
-      coords = new Coordinates(this.currentPlayer.selectRandomCoordinates());
+      coords = new Coordinates(this.currentPlayer.selectAttack());
       cellHit = this.nextPlayer.gameboard.getCellByCoordinates(coords).hit;
     } while (cellHit);
 

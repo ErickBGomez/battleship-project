@@ -16,9 +16,15 @@ class ComputerPlayer extends Player {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  selectRandomCoordinates() {
-    const column = randomRange(0, 9);
-    const row = randomRange(0, 9);
+  selectAttack() {
+    let column;
+    let row;
+
+    if (this.#difficulty === "easy") {
+      column = randomRange(0, 9);
+      row = randomRange(0, 9);
+    }
+
     return Coordinates.convert(column, row);
   }
 }
