@@ -38,6 +38,8 @@ class Game {
     return this.#players[Number(!this.#playerFlag)];
   }
 
+  // Private functions
+
   #swapNextPlayer() {
     this.#playerFlag = !this.#playerFlag;
   }
@@ -46,7 +48,7 @@ class Game {
     return this.nextPlayer.gameboard.allShipsSunk();
   }
 
-  placeShips() {
+  #placeShips() {
     this.#players[0].setShips([
       {
         ship: new Ship(2),
@@ -119,7 +121,7 @@ class Game {
         this.#swapNextPlayer();
       }
 
-      this.playTurn();
+      this.#playTurn();
     } catch (error) {
       console.error(error.message);
     }
@@ -150,7 +152,7 @@ class Game {
     this.#handleTurn(coords);
   }
 
-  playTurn() {
+  #playTurn() {
     this.currentPlayer.state = "attacking";
     this.nextPlayer.state = "waiting";
 
@@ -168,9 +170,9 @@ class Game {
     this.#players.forEach((player) => createBoard(player));
 
     // Set state to "Placing ships"
-    this.placeShips();
+    this.#placeShips();
 
-    this.playTurn();
+    this.#playTurn();
   }
 }
 
