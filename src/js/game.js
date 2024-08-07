@@ -87,7 +87,7 @@ class Game {
 
     // Try getting a valid coordinate selection before handling the turn
     do {
-      coords = new Coordinates(this.currentPlayer.selectAttack());
+      coords = this.currentPlayer.selectAttack();
       cellHit = this.nextPlayer.gameboard.getCellByCoordinates(coords).hit;
     } while (cellHit);
 

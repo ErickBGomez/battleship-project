@@ -25,7 +25,7 @@ class ComputerPlayer extends Player {
       row = randomRange(0, 9);
     }
 
-    return Coordinates.convert(column, row);
+    return new Coordinates(Coordinates.convert(column, row));
   }
 }
 
