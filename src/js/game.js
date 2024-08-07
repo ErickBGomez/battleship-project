@@ -48,6 +48,52 @@ class Game {
     return this.nextPlayer.gameboard.allShipsSunk();
   }
 
+  #handleTurn(coordinates) {
+    try {
+      this.nextPlayer.gameboard.receiveAttack(coordinates);
+
+      updateBoard(this.nextPlayer);
+
+      if (this.#checkWin()) {
+        alert("Game over!");
+        return;
+      }
+
+      if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
+        this.#swapNextPlayer();
+      }
+
+      this.#playTurn();
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  #setEvents(player) {
+    const cells = getBoardCells(player);
+
+    cells.forEach((cell) => {
+      cell.addEventListener("click", (e) => {
+        this.#handleTurn(new Coordinates(e.target.dataset.coordinates));
+      });
+    });
+  }
+
+  #tryComputerSelection() {
+    if (!(this.currentPlayer instanceof ComputerPlayer)) return;
+
+    let cellHit;
+    let coords;
+
+    // Try getting a valid coordinate selection before handling the turn
+    do {
+      coords = new Coordinates(this.currentPlayer.selectRandomCoordinates());
+      cellHit = this.nextPlayer.gameboard.getCellByCoordinates(coords).hit;
+    } while (cellHit);
+
+    this.#handleTurn(coords);
+  }
+
   #placeShips() {
     this.#players[0].setShips([
       {
@@ -104,52 +150,6 @@ class Game {
         direction: "right",
       },
     ]);
-  }
-
-  #handleTurn(coordinates) {
-    try {
-      this.nextPlayer.gameboard.receiveAttack(coordinates);
-
-      updateBoard(this.nextPlayer);
-
-      if (this.#checkWin()) {
-        alert("Game over!");
-        return;
-      }
-
-      if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
-        this.#swapNextPlayer();
-      }
-
-      this.#playTurn();
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  #setEvents(player) {
-    const cells = getBoardCells(player);
-
-    cells.forEach((cell) => {
-      cell.addEventListener("click", (e) => {
-        this.#handleTurn(new Coordinates(e.target.dataset.coordinates));
-      });
-    });
-  }
-
-  #tryComputerSelection() {
-    if (!(this.currentPlayer instanceof ComputerPlayer)) return;
-
-    let cellHit;
-    let coords;
-
-    // Try getting a valid coordinate selection before handling the turn
-    do {
-      coords = new Coordinates(this.currentPlayer.selectRandomCoordinates());
-      cellHit = this.nextPlayer.gameboard.getCellByCoordinates(coords).hit;
-    } while (cellHit);
-
-    this.#handleTurn(coords);
   }
 
   #playTurn() {

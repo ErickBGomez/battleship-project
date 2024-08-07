@@ -2,6 +2,18 @@ import Coordinates from "../coordinates";
 import Player from "./player";
 
 class ComputerPlayer extends Player {
+  #difficulty;
+
+  constructor(name, id, difficulty) {
+    super(name, id);
+
+    this.#difficulty = difficulty;
+  }
+
+  get difficulty() {
+    return this.#difficulty;
+  }
+
   #randomRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
