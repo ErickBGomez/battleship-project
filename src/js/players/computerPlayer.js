@@ -15,6 +15,7 @@ class ComputerPlayer extends Player {
     return this.#difficulty;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   selectRandomCoordinates() {
     const column = randomRange(0, 9);
     const row = randomRange(0, 9);
