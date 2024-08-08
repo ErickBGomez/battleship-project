@@ -42,7 +42,7 @@ class Gameboard {
       ); // eslint-disable-line function-paren-newline
   }
 
-  static #inBounds(column, row) {
+  static inBounds(column, row) {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
@@ -64,7 +64,7 @@ class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       // Error: Ship out of bounds
-      if (!Gameboard.#inBounds(currentColumn, currentRow)) {
+      if (!Gameboard.inBounds(currentColumn, currentRow)) {
         throw new OutOfBoundsError("Ship out of bounds");
       }
 
@@ -141,7 +141,7 @@ class Gameboard {
   }
 
   receiveAttack(coordinates) {
-    if (!Gameboard.#inBounds(coordinates.columnIndex, coordinates.rowIndex)) {
+    if (!Gameboard.inBounds(coordinates.columnIndex, coordinates.rowIndex)) {
       throw new OutOfBoundsError("Attack coordinates is out of bounds");
     }
 
