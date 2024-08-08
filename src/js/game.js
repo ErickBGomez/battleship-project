@@ -11,10 +11,14 @@ import ComputerPlayer from "./players/computerPlayer";
 import { randomDirection } from "./utils";
 
 /* TODO:
-1. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
-2. Drag and drop ship placement
-3. Handle errors to avoid incorrect placements
-4. Create Human and Computers players functions
+1. Advanced computer behavior when hitting a ship
+2. Better UI
+3. Replace prompts, confirms and alerts to custom modal dialogs
+4. Ask for vs 2P or CPU
+5. Ask CPU Difficulty
+6. Show next player board bigger than current player board
+7. Add delays and animations
+8. Drag and drop ship placement
   */
 
 class Game {
@@ -47,7 +51,6 @@ class Game {
   }
 
   // Private functions
-
   #bothPlayersHuman() {
     return this.#isHuman(this.currentPlayer) && this.#isHuman(this.nextPlayer);
   }
@@ -90,7 +93,7 @@ class Game {
         this.#swapNextPlayer();
       } else if (this.#bothPlayersHuman()) {
         // When both players are human, don't stop current player's turn when they hit
-        // a consecutive ship
+        // consecutive cells with a ship
         this.#playTurn();
       }
 
@@ -239,14 +242,8 @@ class Game {
 
     this.#setActionButtons();
 
-    // Set state to "Placing ships"
+    // Start game with current player placement
     this.#placeShips();
-
-    // this.#swapNextPlayer();
-    // this.#placeShips();
-    // this.#swapNextPlayer();
-
-    // this.#playTurn();
   }
 }
 
