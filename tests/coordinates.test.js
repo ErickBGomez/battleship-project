@@ -83,6 +83,6 @@ describe("Random coordinates tests", () => {
   test("Return a random coordinate", () => {
     expect(
       Coordinates.randomCoordinates({ min: 0, max: 9 }, { min: 0, max: 9 }),
-    ).toBeUndefined();
+    ).toBeDefined();
   });
 });
