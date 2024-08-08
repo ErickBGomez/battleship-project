@@ -99,7 +99,7 @@ class Game {
     this.#handleTurn(coords);
   }
 
-  #placeShips(player) {
+  #placeShips() {
     const ships = [
       new Ship(2, "Destroyer"),
       new Ship(3, "Submarine"),
@@ -109,7 +109,7 @@ class Game {
     ];
 
     const res = confirm(
-      `Placing ships for ${player.name}\nSelect placement? True: Manual. False: Random`,
+      `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
     );
 
     while (ships.length) {
@@ -120,10 +120,10 @@ class Game {
 
         if (res) {
           coords = prompt(
-            `[${player.name}] Coordinates for ${ship.name} (Length: ${ship.length})`,
+            `[${this.currentPlayer.name}] Coordinates for ${ship.name} (Length: ${ship.length})`,
           );
           direction = prompt(
-            `[${player.name}] Direction for ${ship.name} (Length: ${ship.length})`,
+            `[${this.currentPlayer.name}] Direction for ${ship.name} (Length: ${ship.length})`,
             "down",
           );
         } else {
@@ -134,10 +134,14 @@ class Game {
           direction = randomDirection();
         }
 
-        player.gameboard.placeShip(ship, new Coordinates(coords), direction);
+        this.currentPlayer.gameboard.placeShip(
+          ship,
+          new Coordinates(coords),
+          direction,
+        );
         ships.shift();
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     }
   }
@@ -160,8 +164,10 @@ class Game {
     this.#players.forEach((player) => createBoard(player));
 
     // Set state to "Placing ships"
-    this.#placeShips(this.currentPlayer);
-    this.#placeShips(this.nextPlayer);
+    this.#placeShips();
+    this.#swapNextPlayer();
+    this.#placeShips();
+    this.#swapNextPlayer();
 
     this.#playTurn();
   }
