@@ -48,8 +48,12 @@ class Game {
 
   // Private functions
 
-  #cpuCurrentPlayer() {
-    return this.currentPlayer instanceof ComputerPlayer;
+  #isHuman(player) {
+    return !(player instanceof ComputerPlayer);
+  }
+
+  #isComputer(player) {
+    return player instanceof ComputerPlayer;
   }
 
   #swapNextPlayer() {
@@ -92,7 +96,7 @@ class Game {
   }
 
   #tryComputerSelection() {
-    if (!this.#cpuCurrentPlayer()) return;
+    if (!this.#isComputer(this.currentPlayer)) return;
 
     let cellHit;
     let coords;
@@ -120,7 +124,7 @@ class Game {
 
     let res;
 
-    if (this.#cpuCurrentPlayer()) {
+    if (this.#isComputer(this.currentPlayer)) {
       res = false;
     } else {
       res = confirm(
@@ -164,7 +168,7 @@ class Game {
 
     updateBoard(this.currentPlayer);
 
-    if (this.#cpuCurrentPlayer()) this.#delegateShipPlacement();
+    if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
 
   #playTurn() {
@@ -174,7 +178,7 @@ class Game {
     updateBoard(this.currentPlayer);
     updateBoard(this.nextPlayer);
 
-    if (this.#cpuCurrentPlayer()) {
+    if (this.#isComputer(this.currentPlayer)) {
       this.#tryComputerSelection();
     } else {
       this.#setEvents(this.nextPlayer);

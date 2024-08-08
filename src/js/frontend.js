@@ -146,7 +146,7 @@ function createButtons() {
   const confirmAttack = document.createElement("button");
   confirmAttack.classList.add("attack");
   confirmAttack.classList.add("hidden");
-  confirmAttack.textContent = "Confirm attack";
+  confirmAttack.textContent = "Next player";
 
   container.appendChild(confirmPlacement);
   container.appendChild(confirmAttack);
