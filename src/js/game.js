@@ -89,7 +89,7 @@ class Game {
 
         this.#swapNextPlayer();
       } else if (this.#bothPlayersHuman()) {
-        // When both players are human, dont stop current player's turn when they hit
+        // When both players are human, don't stop current player's turn when they hit
         // a consecutive ship
         this.#playTurn();
       }
