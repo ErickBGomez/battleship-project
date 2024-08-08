@@ -17,6 +17,8 @@ class Game {
 
   #playerFlag = false;
 
+  #placeShipsTurns = 0;
+
   constructor(vsComputer) {
     if (vsComputer) {
       this.#players.push(new Player(1, "Player"));
@@ -108,9 +110,12 @@ class Game {
       new Ship(5, "Carrier"),
     ];
 
-    const res = confirm(
-      `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
-    );
+    const res =
+      this.currentPlayer instanceof ComputerPlayer
+        ? false
+        : confirm(
+            `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
+          );
 
     while (ships.length) {
       try {
@@ -165,11 +170,11 @@ class Game {
 
     // Set state to "Placing ships"
     this.#placeShips();
-    this.#swapNextPlayer();
-    this.#placeShips();
-    this.#swapNextPlayer();
+    // this.#swapNextPlayer();
+    // this.#placeShips();
+    // this.#swapNextPlayer();
 
-    this.#playTurn();
+    // this.#playTurn();
   }
 }
 
