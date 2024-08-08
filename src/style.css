@@ -18,11 +18,9 @@ body {
   color: var(--White);
   background-color: var(--White);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   min-height: 100vh;
-  max-width: 850px;
-  margin: 0 auto;
   background-color: #232830;
 }
 
@@ -39,6 +37,14 @@ h1 {
 
 button {
   cursor: pointer;
+}
+
+.boards-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .gameboard-container {

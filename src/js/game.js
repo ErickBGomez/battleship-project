@@ -102,6 +102,9 @@ class Game {
   }
 
   #placeShips() {
+    this.currentPlayer.state = "placing";
+    this.nextPlayer.state = "waiting";
+
     const ships = [
       new Ship(2, "Destroyer"),
       new Ship(3, "Submarine"),
@@ -119,7 +122,7 @@ class Game {
 
     while (ships.length) {
       try {
-        const ship = ships[0];
+        const [ship] = ships;
         let coords;
         let direction;
 
@@ -149,6 +152,8 @@ class Game {
         // console.error(error);
       }
     }
+
+    updateBoard(this.currentPlayer);
   }
 
   #playTurn() {
@@ -170,6 +175,7 @@ class Game {
 
     // Set state to "Placing ships"
     this.#placeShips();
+
     // this.#swapNextPlayer();
     // this.#placeShips();
     // this.#swapNextPlayer();

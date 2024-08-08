@@ -151,10 +151,11 @@ function createButtons() {
   container.appendChild(confirmPlacement);
   container.appendChild(confirmAttack);
 
-  return container;
+  document.body.appendChild(container);
 }
 
 function createBoard(player) {
+  const boardsContainer = document.querySelector(".boards-container");
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
   container.dataset.player = player.id;
@@ -175,14 +176,24 @@ function createBoard(player) {
 
   const info = createBoardInfo(player.gameboard);
 
-  const buttons = createButtons();
-
   container.appendChild(playerName);
   container.appendChild(board);
   container.appendChild(info);
-  container.appendChild(buttons);
+
+  boardsContainer.appendChild(container);
+}
+
+function createBoardsContainer() {
+  const container = document.createElement("div");
+  container.classList.add("boards-container");
 
   document.body.appendChild(container);
 }
 
-export { createBoard, updateBoard, getBoardCells };
+export {
+  createBoardsContainer,
+  createButtons,
+  createBoard,
+  updateBoard,
+  getBoardCells,
+};
