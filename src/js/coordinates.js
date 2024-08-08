@@ -39,7 +39,7 @@ class Coordinates {
     const randomColumn = randomRange(column.min, column.max);
     const randomRow = randomRange(row.min, row.max);
 
-    return new Coordinates(Coordinates.convertAsValue(randomColumn, randomRow));
+    return Coordinates.convert(randomColumn, randomRow);
   }
 
   static validate(coordinates) {

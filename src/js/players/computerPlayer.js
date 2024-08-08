@@ -26,7 +26,7 @@ class ComputerPlayer extends Player {
   selectAttack() {
     const column = randomRange(0, 9);
     const row = randomRange(0, 9);
-    return new Coordinates(Coordinates.convert(column, row));
+    return Coordinates.convert(column, row);
   }
 }
 
