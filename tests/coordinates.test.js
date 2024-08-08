@@ -72,3 +72,17 @@ describe("Coordinates conversion tests", () => {
     );
   });
 });
+
+describe("Random coordinates tests", () => {
+  test("Should return a valid coordinate (B2)", () => {
+    expect(
+      Coordinates.randomCoordinates({ min: 1, max: 1 }, { min: 1, max: 1 }),
+    ).toEqual({ value: "B2" });
+  });
+
+  test("Return a random coordinate", () => {
+    expect(
+      Coordinates.randomCoordinates({ min: 0, max: 9 }, { min: 0, max: 9 }),
+    ).toBeUndefined();
+  });
+});
