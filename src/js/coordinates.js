@@ -39,7 +39,7 @@ class Coordinates {
     const randomColumn = randomRange(column.min, column.max);
     const randomRow = randomRange(row.min, row.max);
 
-    return new Coordinates(Coordinates.convert(randomColumn, randomRow));
+    return new Coordinates(Coordinates.convertAsValue(randomColumn, randomRow));
   }
 
   static validate(coordinates) {
@@ -48,6 +48,10 @@ class Coordinates {
   }
 
   static convert(column, row) {
+    return new Coordinates(Coordinates.convertAsValue(column, row));
+  }
+
+  static convertAsValue(column, row) {
     if (column < 0 || row < 0) {
       throw new InvalidCoordinatesError(
         "Cannot convert negative values for columns or rows",
