@@ -144,7 +144,7 @@ function createButtons() {
   confirmPlacement.textContent = "Confirm placement";
 
   const confirmAttack = document.createElement("button");
-  confirmAttack.classList.add("confirm-attack");
+  confirmAttack.classList.add("attack");
   confirmAttack.classList.add("hidden");
   confirmAttack.textContent = "Confirm attack";
 
@@ -152,6 +152,11 @@ function createButtons() {
   container.appendChild(confirmAttack);
 
   document.body.appendChild(container);
+}
+
+function showButton(className) {
+  const button = document.querySelector(`button.${className}`);
+  button.classList.toggle("hidden");
 }
 
 function createBoard(player) {
@@ -193,6 +198,7 @@ function createBoardsContainer() {
 export {
   createBoardsContainer,
   createButtons,
+  showButton,
   createBoard,
   updateBoard,
   getBoardCells,

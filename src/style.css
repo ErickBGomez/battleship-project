@@ -19,6 +19,8 @@ body {
   background-color: var(--White);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 25px;
   justify-content: center;
   min-height: 100vh;
   background-color: #232830;
