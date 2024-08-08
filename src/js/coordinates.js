@@ -1,4 +1,5 @@
 import InvalidCoordinatesError from "./errors/invalidCoordinatesError";
+import { randomRange } from "./utils";
 
 class Coordinates {
   #column;
@@ -31,6 +32,16 @@ class Coordinates {
   }
 
   // Methods
+  static randomCoordinates(
+    column = { min: 0, max: 1 },
+    row = { min: 0, max: 1 },
+  ) {
+    const randomColumn = randomRange(column.min, column.max);
+    const randomRow = randomRange(row.min, row.max);
+
+    return new Coordinates(Coordinates.convert(randomColumn, randomRow));
+  }
+
   static validate(coordinates) {
     const pattern = /^[A-Z][1-9]\d*$/;
     return pattern.test(coordinates);
