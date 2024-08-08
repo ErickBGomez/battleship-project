@@ -48,6 +48,10 @@ class Game {
 
   // Private functions
 
+  #bothPlayersHuman() {
+    return this.#isHuman(this.currentPlayer) && this.#isHuman(this.nextPlayer);
+  }
+
   #isHuman(player) {
     return !(player instanceof ComputerPlayer);
   }
@@ -66,8 +70,8 @@ class Game {
 
   #handleTurn(coordinates) {
     try {
+      // Perform attack and show it in the next player's board
       this.nextPlayer.gameboard.receiveAttack(coordinates);
-
       updateBoard(this.nextPlayer);
 
       if (this.#checkWin()) {
@@ -76,10 +80,24 @@ class Game {
       }
 
       if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
+        // Only show "Next player" button when both players are human
+        if (this.#bothPlayersHuman()) showButton("attack");
+
+        // Hide current player's ship when their turn ended
+        this.currentPlayer.state = "waiting";
+        updateBoard(this.currentPlayer);
+
         this.#swapNextPlayer();
+      } else if (this.#bothPlayersHuman()) {
+        // When both players are human, dont stop current player's turn when they hit
+        // a consecutive ship
+        this.#playTurn();
       }
 
-      this.#playTurn();
+      // Avoid pausing the game when is the computer's turn
+      if (!this.#bothPlayersHuman()) {
+        this.#playTurn();
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -209,7 +227,11 @@ class Game {
       this.#delegateShipPlacement();
     });
 
-    attack.addEventListener("click", () => {});
+    attack.addEventListener("click", (e) => {
+      e.target.classList.toggle("hidden");
+
+      this.#playTurn();
+    });
   }
 
   setupGame() {
