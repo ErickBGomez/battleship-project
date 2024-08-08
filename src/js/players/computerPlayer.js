@@ -57,7 +57,7 @@ class ComputerPlayer extends Player {
             default:
           }
 
-          if ((column < 0 || column > 9) && (row < 0 || row > 9)) {
+          if (column < 0 || column > 9 || row < 0 || row > 9) {
             throw new OutOfBoundsError("Out of bounds");
           }
           positionFlag = false;
