@@ -40,6 +40,10 @@ class Game {
 
   // Private functions
 
+  #cpuCurrentPlayer() {
+    return this.currentPlayer instanceof ComputerPlayer;
+  }
+
   #swapNextPlayer() {
     this.#playerFlag = !this.#playerFlag;
   }
@@ -63,7 +67,7 @@ class Game {
       }
 
       if (shipHit) {
-        if (this.currentPlayer instanceof ComputerPlayer) {
+        if (this.#cpuCurrentPlayer()) {
           if (shipHit.isSunk()) {
             this.currentPlayer.shipFoundPosition = null;
           } else {
@@ -91,7 +95,7 @@ class Game {
   }
 
   #tryComputerSelection() {
-    if (!(this.currentPlayer instanceof ComputerPlayer)) return;
+    if (!this.#cpuCurrentPlayer()) return;
 
     let cellHit;
     let coords;
@@ -170,7 +174,7 @@ class Game {
     updateBoard(this.currentPlayer);
     updateBoard(this.nextPlayer);
 
-    if (this.currentPlayer instanceof ComputerPlayer) {
+    if (this.#cpuCurrentPlayer()) {
       this.#tryComputerSelection();
     } else {
       this.#setEvents(this.nextPlayer);
