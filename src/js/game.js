@@ -98,62 +98,60 @@ class Game {
     this.#handleTurn(coords);
   }
 
-  #placeShips() {
-    this.#players[0].setShips([
-      {
-        ship: new Ship(2),
-        coordinates: new Coordinates("A1"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(2),
-        coordinates: new Coordinates("A3"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(3),
-        coordinates: new Coordinates("J1"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(4),
-        coordinates: new Coordinates("A10"),
-        direction: "right",
-      },
-      {
-        ship: new Ship(5),
-        coordinates: new Coordinates("F10"),
-        direction: "right",
-      },
-    ]);
+  #placeShips(player) {
+    const ships = [
+      new Ship(2, "Destroyer"),
+      new Ship(3, "Submarine"),
+      new Ship(3, "Cruiser"),
+      new Ship(4, "Battleship"),
+      new Ship(5, "Carrier"),
+    ];
 
-    this.#players[1].setShips([
-      {
-        ship: new Ship(2),
-        coordinates: new Coordinates("B5"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(2),
-        coordinates: new Coordinates("D3"),
-        direction: "right",
-      },
-      {
-        ship: new Ship(3),
-        coordinates: new Coordinates("G4"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(4),
-        coordinates: new Coordinates("I6"),
-        direction: "down",
-      },
-      {
-        ship: new Ship(5),
-        coordinates: new Coordinates("C8"),
-        direction: "right",
-      },
-    ]);
+    const res = confirm(
+      `Placing ships for ${player.name}\nSelect placement? True: Manual. False: Random`,
+    );
+
+    if (res) {
+      ships.forEach((ship) => {
+        const coords = prompt(
+          `[${player.name}] Coordinates for ${ship.name} (Length: ${ship.length})`,
+        );
+        const direction = prompt(
+          `[${player.name}] Direction for ${ship.name} (Length: ${ship.length})`,
+          "down",
+        );
+
+        player.gameboard.placeShip(ship, new Coordinates(coords), direction);
+      });
+    } else {
+      player.setShips([
+        {
+          ship: new Ship(2),
+          coordinates: new Coordinates("B5"),
+          direction: "down",
+        },
+        {
+          ship: new Ship(2),
+          coordinates: new Coordinates("D3"),
+          direction: "right",
+        },
+        {
+          ship: new Ship(3),
+          coordinates: new Coordinates("G4"),
+          direction: "down",
+        },
+        {
+          ship: new Ship(4),
+          coordinates: new Coordinates("I6"),
+          direction: "down",
+        },
+        {
+          ship: new Ship(5),
+          coordinates: new Coordinates("C8"),
+          direction: "right",
+        },
+      ]);
+    }
   }
 
   #playTurn() {
@@ -174,7 +172,8 @@ class Game {
     this.#players.forEach((player) => createBoard(player));
 
     // Set state to "Placing ships"
-    this.#placeShips();
+    this.#placeShips(this.currentPlayer);
+    this.#placeShips(this.nextPlayer);
 
     this.#playTurn();
   }
