@@ -19,7 +19,7 @@ class Game {
   constructor(vsComputer) {
     if (vsComputer) {
       this.#players.push(new Player(1, "Player"));
-      this.#players.push(new ComputerPlayer(2, "CPU", "hard"));
+      this.#players.push(new ComputerPlayer(2, "CPU", "easy"));
     } else {
       this.#players.push(new Player(1, "Player 1"));
       this.#players.push(new Player(2, "Player 2"));
@@ -56,9 +56,6 @@ class Game {
     try {
       this.nextPlayer.gameboard.receiveAttack(coordinates);
 
-      const shipHit =
-        this.nextPlayer.gameboard.getCellByCoordinates(coordinates).ship;
-
       updateBoard(this.nextPlayer);
 
       if (this.#checkWin()) {
@@ -66,15 +63,7 @@ class Game {
         return;
       }
 
-      if (shipHit) {
-        if (this.#cpuCurrentPlayer()) {
-          if (shipHit.isSunk()) {
-            this.currentPlayer.shipFoundPosition = null;
-          } else {
-            this.currentPlayer.shipFoundPosition = coordinates;
-          }
-        }
-      } else {
+      if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
         this.#swapNextPlayer();
       }
 
