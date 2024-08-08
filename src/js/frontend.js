@@ -138,11 +138,18 @@ function createButtons() {
   const container = document.createElement("div");
   container.classList.add("buttons");
 
-  const confirmButton = document.createElement("button");
-  confirmButton.classList.add("confirm");
-  confirmButton.textContent = "Confirm";
+  const confirmPlacement = document.createElement("button");
+  confirmPlacement.classList.add("placement");
+  confirmPlacement.classList.add("hidden");
+  confirmPlacement.textContent = "Confirm placement";
 
-  container.appendChild(confirmButton);
+  const confirmAttack = document.createElement("button");
+  confirmAttack.classList.add("confirm-attack");
+  confirmAttack.classList.add("hidden");
+  confirmAttack.textContent = "Confirm attack";
+
+  container.appendChild(confirmPlacement);
+  container.appendChild(confirmAttack);
 
   return container;
 }
