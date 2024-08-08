@@ -3,6 +3,7 @@ import { createBoard, getBoardCells, updateBoard } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";
+import { randomDirection } from "./utils";
 
 /* TODO:
 1. For State Machine, should be 3 states: Placing ships, Performing attack and Receiving Attack
@@ -111,46 +112,33 @@ class Game {
       `Placing ships for ${player.name}\nSelect placement? True: Manual. False: Random`,
     );
 
-    if (res) {
-      ships.forEach((ship) => {
-        const coords = prompt(
-          `[${player.name}] Coordinates for ${ship.name} (Length: ${ship.length})`,
-        );
-        const direction = prompt(
-          `[${player.name}] Direction for ${ship.name} (Length: ${ship.length})`,
-          "down",
-        );
+    while (ships.length) {
+      try {
+        const ship = ships[0];
+        let coords;
+        let direction;
+
+        if (res) {
+          coords = prompt(
+            `[${player.name}] Coordinates for ${ship.name} (Length: ${ship.length})`,
+          );
+          direction = prompt(
+            `[${player.name}] Direction for ${ship.name} (Length: ${ship.length})`,
+            "down",
+          );
+        } else {
+          coords = Coordinates.randomCoordinates(
+            { min: 0, max: 9 },
+            { min: 0, max: 9 },
+          ).value;
+          direction = randomDirection();
+        }
 
         player.gameboard.placeShip(ship, new Coordinates(coords), direction);
-      });
-    } else {
-      player.setShips([
-        {
-          ship: new Ship(2),
-          coordinates: new Coordinates("B5"),
-          direction: "down",
-        },
-        {
-          ship: new Ship(2),
-          coordinates: new Coordinates("D3"),
-          direction: "right",
-        },
-        {
-          ship: new Ship(3),
-          coordinates: new Coordinates("G4"),
-          direction: "down",
-        },
-        {
-          ship: new Ship(4),
-          coordinates: new Coordinates("I6"),
-          direction: "down",
-        },
-        {
-          ship: new Ship(5),
-          coordinates: new Coordinates("C8"),
-          direction: "right",
-        },
-      ]);
+        ships.shift();
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
