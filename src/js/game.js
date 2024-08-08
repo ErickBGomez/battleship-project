@@ -1,5 +1,10 @@
 import Player from "./players/player";
-import { createBoard, getBoardCells, updateBoard } from "./frontend";
+import {
+  createBoard,
+  getBoardCells,
+  showButton,
+  updateBoard,
+} from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";
@@ -113,12 +118,16 @@ class Game {
       new Ship(5, "Carrier"),
     ];
 
-    const res =
-      this.currentPlayer instanceof ComputerPlayer
-        ? false
-        : confirm(
-            `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
-          );
+    let res;
+
+    if (this.#cpuCurrentPlayer()) {
+      res = false;
+    } else {
+      res = confirm(
+        `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
+      );
+      showButton("placement");
+    }
 
     while (ships.length) {
       try {
@@ -154,6 +163,8 @@ class Game {
     }
 
     updateBoard(this.currentPlayer);
+
+    if (this.#cpuCurrentPlayer()) this.#delegateShipPlacement();
   }
 
   #playTurn() {
@@ -170,8 +181,37 @@ class Game {
     }
   }
 
+  #delegateShipPlacement() {
+    this.#swapNextPlayer();
+    this.#placeShipsTurns++;
+    this.#decideTurn();
+  }
+
+  #decideTurn() {
+    if (this.#placeShipsTurns >= 2) {
+      this.#playTurn();
+    } else {
+      this.#placeShips();
+    }
+  }
+
+  #setActionButtons() {
+    const placement = document.querySelector("button.placement");
+    const attack = document.querySelector("button.attack");
+
+    placement.addEventListener("click", (e) => {
+      e.target.classList.toggle("hidden");
+
+      this.#delegateShipPlacement();
+    });
+
+    attack.addEventListener("click", () => {});
+  }
+
   setupGame() {
     this.#players.forEach((player) => createBoard(player));
+
+    this.#setActionButtons();
 
     // Set state to "Placing ships"
     this.#placeShips();
