@@ -49,24 +49,40 @@ describe("Coordinates tests", () => {
 
 describe("Coordinates conversion tests", () => {
   test("column 0 and row 0 should return A1", () => {
-    expect(Coordinates.convert(0, 0)).toBe("A1");
+    expect(Coordinates.convertAsValue(0, 0)).toBe("A1");
   });
 
   test("column 9 and row 9 should return J10", () => {
-    expect(Coordinates.convert(9, 9)).toBe("J10");
+    expect(Coordinates.convertAsValue(9, 9)).toBe("J10");
   });
 
   test("Cannot convert negative values", () => {
-    expect(() => Coordinates.convert(-1, -1)).toThrow(InvalidCoordinatesError);
-  });
-
-  test("Cannot convert string values", () => {
-    expect(() => Coordinates.convert("A", "A")).toThrow(
+    expect(() => Coordinates.convertAsValue(-1, -1)).toThrow(
       InvalidCoordinatesError,
     );
   });
 
   test("Cannot convert string values", () => {
+    expect(() => Coordinates.convertAsValue("A", "A")).toThrow(
+      InvalidCoordinatesError,
+    );
+  });
+
+  test("Cannot convert string values", () => {
+    expect(() => Coordinates.convertAsValue("1", "1")).toThrow(
+      InvalidCoordinatesError,
+    );
+  });
+
+  test("Convert as a object instead of value A1", () => {
+    expect(Coordinates.convert(0, 0)).toEqual({ value: "A1" });
+  });
+
+  test("Convert as a object instead of value J10", () => {
+    expect(Coordinates.convert(9, 9)).toEqual({ value: "J10" });
+  });
+
+  test("Object conversion throws the same errors like just as value", () => {
     expect(() => Coordinates.convert("1", "1")).toThrow(
       InvalidCoordinatesError,
     );
