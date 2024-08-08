@@ -118,17 +118,17 @@ class Game {
       },
       {
         ship: new Ship(2),
-        coordinates: new Coordinates("C3"),
-        direction: "right",
+        coordinates: new Coordinates("A3"),
+        direction: "down",
       },
       {
         ship: new Ship(3),
-        coordinates: new Coordinates("H2"),
+        coordinates: new Coordinates("J1"),
         direction: "down",
       },
       {
         ship: new Ship(4),
-        coordinates: new Coordinates("E6"),
+        coordinates: new Coordinates("A10"),
         direction: "right",
       },
       {
