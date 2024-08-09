@@ -90,11 +90,43 @@ class Game {
           // don't stop current player's turn when they hit consecutive cells with a ship
           this.#playTurn();
         } else if (this.#isComputer(this.currentPlayer)) {
-          this.currentPlayer.shipFoundPosition = this.nextPlayer.gameboard
-            .getCellByCoordinates(coordinates)
-            .ship.isSunk()
-            ? null
-            : coordinates;
+          // this.currentPlayer.shipFoundPosition =
+          //   this.nextPlayer.gameboard.adjacentCellsAvailable(
+          //     this.currentPlayer.shipFoundPosition,
+          //   ) &&
+          //   !this.nextPlayer.gameboard
+          //     .getCellByCoordinates(coordinates)
+          //     .ship.isSunk()
+          //     ? coordinates
+          //     : null;
+
+          // this.currentPlayer.shipFoundPosition =
+          //   this.nextPlayer.gameboard
+          //     .getCellByCoordinates(coordinates)
+          //     .ship.isSunk() ||
+          //   (this.currentPlayer.shipFoundPosition &&
+          //     !this.nextPlayer.gameboard.adjacentCellsAvailable(
+          //       this.currentPlayer.shipFoundPosition,
+          //     ))
+          //     ? null
+          //     : coordinates;
+          if (
+            this.nextPlayer.gameboard
+              .getCellByCoordinates(coordinates)
+              .ship.isSunk()
+          ) {
+            this.currentPlayer.shipFoundPosition = null;
+          } else {
+            this.currentPlayer.shipFoundPosition = coordinates;
+
+            if (
+              !this.nextPlayer.gameboard.adjacentCellsAvailable(
+                this.currentPlayer.shipFoundPosition,
+              )
+            ) {
+              this.currentPlayer.shipFoundPosition = null;
+            }
+          }
         }
       } else {
         // Only show "Next player" button when both players are human
