@@ -19,6 +19,8 @@ import { randomDirection } from "./utils";
 6. Show next player board bigger than current player board
 7. Add delays and animations
 8. Drag and drop ship placement
+
+9. Avoid loop when all adjacent cells are not available
   */
 
 class Game {
