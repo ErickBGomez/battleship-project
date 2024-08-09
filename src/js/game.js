@@ -32,7 +32,8 @@ class Game {
 
   constructor(vsComputer) {
     if (vsComputer) {
-      this.#players.push(new Player(1, "Player"));
+      // this.#players.push(new Player(1, "Player"));
+      this.#players.push(new ComputerPlayer(1, "CPU", "hard"));
       this.#players.push(new ComputerPlayer(2, "CPU", "hard"));
     } else {
       this.#players.push(new Player(1, "Player 1"));
@@ -74,6 +75,9 @@ class Game {
   }
 
   #handleTurn(coordinates) {
+    console.log(
+      `[${this.currentPlayer.name} ${this.currentPlayer.id}: ${coordinates.value}]`,
+    );
     try {
       // Perform attack and show it in the next player's board
       this.nextPlayer.gameboard.receiveAttack(coordinates);
@@ -85,6 +89,7 @@ class Game {
       }
 
       if (this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
+        console.log("ship");
         if (this.#bothPlayersHuman()) {
           // When current attack hits a ship and both players are human,
           // don't stop current player's turn when they hit consecutive cells with a ship
@@ -97,6 +102,7 @@ class Game {
             : coordinates;
         }
       } else {
+        console.log("no ship");
         // Only show "Next player" button when both players are human
         if (this.#bothPlayersHuman()) showButton("attack");
 
@@ -114,6 +120,7 @@ class Game {
             this.currentPlayer.shipFoundPosition,
           )
         ) {
+          console.log("no adjacents");
           this.currentPlayer.shipFoundPosition = null;
         }
 
@@ -223,7 +230,7 @@ class Game {
     updateBoard(this.nextPlayer);
 
     if (this.#isComputer(this.currentPlayer)) {
-      this.#tryComputerSelection();
+      setTimeout(() => this.#tryComputerSelection(), 10);
     } else {
       this.#setEvents(this.nextPlayer);
     }
