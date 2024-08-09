@@ -27,7 +27,7 @@ class Gameboard {
     return this.#failedHits;
   }
 
-  // Private methods
+  // Private functions
   #initializeBoard() {
     this.#board = Array(10)
       .fill()
@@ -40,10 +40,6 @@ class Gameboard {
             hit: false,
           })),
       ); // eslint-disable-line function-paren-newline
-  }
-
-  static inBounds(column, row) {
-    return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
   #getCell(column, row) {
@@ -98,7 +94,11 @@ class Gameboard {
     }
   }
 
-  // Public Methods
+  // Public functions
+  static inBounds(column, row) {
+    return column >= 0 && column <= 9 && row >= 0 && row <= 9;
+  }
+
   isCellAvailable(coordinates) {
     return this.#isCellAvailable(coordinates.columnIndex, coordinates.rowIndex);
   }
