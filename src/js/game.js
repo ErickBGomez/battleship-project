@@ -20,7 +20,7 @@ import { randomDirection } from "./utils";
 7. Add delays and animations
 8. Drag and drop ship placement
 
-9. In some conditions, there is another type of loop bug. Find a way to know the conditions and fix it
+9. Game freezes when the adjacent cells of the saved ship position of a computer player are not available 
   */
 
 class Game {
