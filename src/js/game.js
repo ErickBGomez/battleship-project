@@ -104,27 +104,17 @@ class Game {
         this.currentPlayer.state = "waiting";
         updateBoard(this.currentPlayer);
 
-        this.#swapNextPlayer();
-      }
-
-      // if (this.#isComputer(this.currentPlayer)) {
-      //   if (
-      //     !this.nextPlayer.gameboard.adjacentCellsAvailable(
-      //       this.currentPlayer.shipFoundPosition,
-      //     )
-      //   ) {
-      //     console.log("adjacents: not available");
-      //   } else {
-      //     console.log("adjacents: available");
-      //   }
-      // }
-
-      if (this.#isComputer(this.currentPlayer)) {
-        if (this.nextPlayer.gameboard.adjacentCellsAvailable(coordinates)) {
-          console.log("adjacents: available");
-        } else {
-          console.log("adjacents: not available");
+        if (this.#isHuman(this.currentPlayer)) {
+          const res =
+            this.nextPlayer.gameboard.adjacentCellsAvailable(coordinates);
+          if (res) {
+            console.log("adjacents: available");
+          } else {
+            console.log("adjacents: not available");
+          }
         }
+
+        this.#swapNextPlayer();
       }
 
       // Only pause the round when both players are human
