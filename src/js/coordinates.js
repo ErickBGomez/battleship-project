@@ -69,6 +69,32 @@ class Coordinates {
     const columnChar = String.fromCharCode(column + 65);
     return columnChar + (row + 1);
   }
+
+  static getMoved(origin, direction, steps) {
+    let [column, row] = origin.valueAsArray;
+
+    switch (direction) {
+      case "up":
+        row -= steps;
+        break;
+
+      case "right":
+        column += steps;
+        break;
+
+      case "down":
+        row += steps;
+        break;
+
+      case "left":
+        column -= steps;
+        break;
+
+      default:
+    }
+
+    return Coordinates.convert(column, row);
+  }
 }
 
 export default Coordinates;
