@@ -82,7 +82,13 @@ class Game {
         return;
       }
 
-      if (!this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
+      if (this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
+        if (this.#bothPlayersHuman()) {
+          // When current attack hits a ship and both players are human,
+          // don't stop current player's turn when they hit consecutive cells with a ship
+          this.#playTurn();
+        }
+      } else {
         // Only show "Next player" button when both players are human
         if (this.#bothPlayersHuman()) showButton("attack");
 
@@ -91,10 +97,6 @@ class Game {
         updateBoard(this.currentPlayer);
 
         this.#swapNextPlayer();
-      } else if (this.#bothPlayersHuman()) {
-        // When current attack hits a ship and both players are human,
-        // don't stop current player's turn when they hit consecutive cells with a ship
-        this.#playTurn();
       }
 
       // Only pause the round when both players are human
