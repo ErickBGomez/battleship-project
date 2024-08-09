@@ -105,6 +105,26 @@ class Game {
         this.#swapNextPlayer();
       }
 
+      // if (this.#isComputer(this.currentPlayer)) {
+      //   if (
+      //     !this.nextPlayer.gameboard.adjacentCellsAvailable(
+      //       this.currentPlayer.shipFoundPosition,
+      //     )
+      //   ) {
+      //     console.log("adjacents: not available");
+      //   } else {
+      //     console.log("adjacents: available");
+      //   }
+      // }
+
+      if (this.#isComputer(this.currentPlayer)) {
+        if (this.nextPlayer.gameboard.adjacentCellsAvailable(coordinates)) {
+          console.log("adjacents: available");
+        } else {
+          console.log("adjacents: not available");
+        }
+      }
+
       // Only pause the round when both players are human
       if (!this.#bothPlayersHuman()) {
         this.#playTurn();
