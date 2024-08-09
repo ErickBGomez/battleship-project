@@ -102,3 +102,33 @@ describe("Gameboard: Receive attacks", () => {
     expect(gb.allShipsSunk()).toBe(true);
   });
 });
+
+describe("Gameboard: Adjacent values", () => {
+  const gba = new Gameboard();
+
+  test("All adjacent cells are available", () => {
+    expect(gba.adjacentCellsAvailable(new Coordinates("B2"))).toBe(true);
+  });
+
+  test("Returns true at corners (Out of bounds up and left, but in bounds down and right)", () => {
+    expect(gba.adjacentCellsAvailable(new Coordinates("A1"))).toBe(true);
+  });
+
+  test("Returns true even when it has a hit cell near (down)", () => {
+    gba.receiveAttack(new Coordinates("B3"));
+
+    expect(gba.adjacentCellsAvailable(new Coordinates("B2"))).toBe(true);
+  });
+
+  test("Returns false when all adjacent cells are hit", () => {
+    gba.receiveAttack(new Coordinates("B1"));
+    gba.receiveAttack(new Coordinates("A2"));
+    gba.receiveAttack(new Coordinates("C2"));
+
+    expect(gba.adjacentCellsAvailable(new Coordinates("B2"))).toBe(false);
+  });
+
+  test("Returns false when adjacent cells are hit (down and right) and at a corner (up and left)", () => {
+    expect(gba.adjacentCellsAvailable(new Coordinates("A1"))).toBe(false);
+  });
+});
