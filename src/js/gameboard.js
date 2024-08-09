@@ -98,7 +98,24 @@ class Gameboard {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
-  // static adjacentCellsAvailable(coordinates) {}
+  // Returns true when at least one cell is still available
+  // "Available" means that is not hit yet and it's in bounds
+  adjacentCellsAvailable(coordinates) {
+    const directions = ["up", "right", "down", "left"];
+    const results = [];
+
+    directions.forEach((direction) => {
+      try {
+        const movedCoords = Coordinates.getMoved(coordinates, direction, 1);
+        const cell = this.getCellByCoordinates(movedCoords);
+        results.push(!cell.hit);
+      } catch {
+        results.push(false);
+      }
+    });
+
+    return results.includes(true);
+  }
 
   isCellAvailable(coordinates) {
     return this.#isCellAvailable(...coordinates.valueAsArray);
