@@ -123,15 +123,15 @@ class Game {
             this.currentPlayer.shipFoundPosition = null;
           } else {
             this.currentPlayer.shipFoundPosition = coordinates;
-          }
 
-          if (
-            this.currentPlayer.shipFoundPosition &&
-            !this.nextPlayer.gameboard.adjacentCellsAvailable(
-              this.currentPlayer.shipFoundPosition,
-            )
-          ) {
-            this.currentPlayer.shipFoundPosition = null;
+            if (
+              !this.nextPlayer.gameboard.adjacentCellsAvailable(
+                this.currentPlayer.shipFoundPosition,
+              )
+            ) {
+              console.log("DOOR STUCK");
+              this.currentPlayer.shipFoundPosition = null;
+            }
           }
         }
       } else {
