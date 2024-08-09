@@ -19,8 +19,6 @@ import { randomDirection } from "./utils";
 6. Show next player board bigger than current player board
 7. Add delays and animations
 8. Drag and drop ship placement
-
-9. Game freezes when the adjacent cells of the saved ship position of a computer player are not available 
   */
 
 class Game {
@@ -90,26 +88,7 @@ class Game {
           // don't stop current player's turn when they hit consecutive cells with a ship
           this.#playTurn();
         } else if (this.#isComputer(this.currentPlayer)) {
-          // this.currentPlayer.shipFoundPosition =
-          //   this.nextPlayer.gameboard.adjacentCellsAvailable(
-          //     this.currentPlayer.shipFoundPosition,
-          //   ) &&
-          //   !this.nextPlayer.gameboard
-          //     .getCellByCoordinates(coordinates)
-          //     .ship.isSunk()
-          //     ? coordinates
-          //     : null;
-
-          // this.currentPlayer.shipFoundPosition =
-          //   this.nextPlayer.gameboard
-          //     .getCellByCoordinates(coordinates)
-          //     .ship.isSunk() ||
-          //   (this.currentPlayer.shipFoundPosition &&
-          //     !this.nextPlayer.gameboard.adjacentCellsAvailable(
-          //       this.currentPlayer.shipFoundPosition,
-          //     ))
-          //     ? null
-          //     : coordinates;
+          // Remove saved coordinates of last ship found when is already sunk
           if (
             this.nextPlayer.gameboard
               .getCellByCoordinates(coordinates)
@@ -117,8 +96,10 @@ class Game {
           ) {
             this.currentPlayer.shipFoundPosition = null;
           } else {
+            // Saved coordinates of the ship if it's still in game
             this.currentPlayer.shipFoundPosition = coordinates;
 
+            // But also remove saved coordinates of ship when their adjacent cells are not available
             if (
               !this.nextPlayer.gameboard.adjacentCellsAvailable(
                 this.currentPlayer.shipFoundPosition,
