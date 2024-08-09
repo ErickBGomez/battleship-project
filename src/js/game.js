@@ -31,7 +31,7 @@ class Game {
   constructor(vsComputer) {
     if (vsComputer) {
       this.#players.push(new Player(1, "Player"));
-      this.#players.push(new ComputerPlayer(2, "CPU", "easy"));
+      this.#players.push(new ComputerPlayer(2, "CPU", "hard"));
     } else {
       this.#players.push(new Player(1, "Player 1"));
       this.#players.push(new Player(2, "Player 2"));
@@ -87,6 +87,12 @@ class Game {
           // When current attack hits a ship and both players are human,
           // don't stop current player's turn when they hit consecutive cells with a ship
           this.#playTurn();
+        } else if (this.#isComputer(this.currentPlayer)) {
+          this.currentPlayer.shipFoundPosition = this.nextPlayer.gameboard
+            .getCellByCoordinates(coordinates)
+            .ship.isSunk()
+            ? null
+            : coordinates;
         }
       } else {
         // Only show "Next player" button when both players are human
