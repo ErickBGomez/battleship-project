@@ -7,20 +7,15 @@ import Gameboard from "../gameboard";
 class ComputerPlayer extends Player {
   #difficulty;
 
-  #shipFoundPosition;
-
   constructor(id, name, difficulty) {
     super(id, name);
 
     this.#difficulty = difficulty;
+    this.shipFoundPosition = null;
   }
 
   get difficulty() {
     return this.#difficulty;
-  }
-
-  set shipFoundPosition(value) {
-    this.#shipFoundPosition = value;
   }
 
   selectAttack() {
@@ -30,9 +25,9 @@ class ComputerPlayer extends Player {
     let invalidCoordinates = false;
 
     do {
-      if (this.#shipFoundPosition && this.#difficulty === "hard") {
-        column = this.#shipFoundPosition.columnIndex;
-        row = this.#shipFoundPosition.rowIndex;
+      if (this.shipFoundPosition && this.#difficulty === "hard") {
+        column = this.shipFoundPosition.columnIndex;
+        row = this.shipFoundPosition.rowIndex;
 
         switch (randomDirection()) {
           case "up":

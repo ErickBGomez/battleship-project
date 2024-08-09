@@ -104,14 +104,17 @@ class Game {
         this.currentPlayer.state = "waiting";
         updateBoard(this.currentPlayer);
 
-        if (this.#isHuman(this.currentPlayer)) {
-          const res =
-            this.nextPlayer.gameboard.adjacentCellsAvailable(coordinates);
-          if (res) {
-            console.log("adjacents: available");
-          } else {
-            console.log("adjacents: not available");
-          }
+        // Computers can get stuck in a loop when the adjacent cells to the last saved position of a
+        // ship found are not available. So, that position is deleted and the computer can keep
+        // launching random attacks again
+        if (
+          this.#isComputer(this.currentPlayer) &&
+          this.currentPlayer.shipFoundPosition &&
+          !this.nextPlayer.gameboard.adjacentCellsAvailable(
+            this.currentPlayer.shipFoundPosition,
+          )
+        ) {
+          this.currentPlayer.shipFoundPosition = null;
         }
 
         this.#swapNextPlayer();
