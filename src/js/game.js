@@ -255,7 +255,6 @@ class Game {
     updateBoard(this.nextPlayer);
 
     if (this.#isComputer(this.currentPlayer)) {
-      // setTimeout(() => this.#tryComputerSelection(), 1);
       this.#tryComputerSelection();
     } else {
       this.#setEvents(this.nextPlayer);
