@@ -95,15 +95,44 @@ class Game {
           // don't stop current player's turn when they hit consecutive cells with a ship
           this.#playTurn();
         } else if (this.#isComputer(this.currentPlayer)) {
-          this.currentPlayer.shipFoundPosition =
-            this.nextPlayer.gameboard.adjacentCellsAvailable(
-              this.currentPlayer.shipFoundPosition,
-            ) &&
-            !this.nextPlayer.gameboard
+          // this.currentPlayer.shipFoundPosition =
+          //   this.nextPlayer.gameboard.adjacentCellsAvailable(
+          //     this.currentPlayer.shipFoundPosition,
+          //   ) &&
+          //   !this.nextPlayer.gameboard
+          //     .getCellByCoordinates(coordinates)
+          //     .ship.isSunk()
+          //     ? coordinates
+          //     : null;
+
+          // this.currentPlayer.shipFoundPosition =
+          //   this.nextPlayer.gameboard
+          //     .getCellByCoordinates(coordinates)
+          //     .ship.isSunk() ||
+          //   (this.currentPlayer.shipFoundPosition &&
+          //     !this.nextPlayer.gameboard.adjacentCellsAvailable(
+          //       this.currentPlayer.shipFoundPosition,
+          //     ))
+          //     ? null
+          //     : coordinates;
+          if (
+            this.nextPlayer.gameboard
               .getCellByCoordinates(coordinates)
               .ship.isSunk()
-              ? coordinates
-              : null;
+          ) {
+            this.currentPlayer.shipFoundPosition = null;
+          } else {
+            this.currentPlayer.shipFoundPosition = coordinates;
+          }
+
+          if (
+            this.currentPlayer.shipFoundPosition &&
+            !this.nextPlayer.gameboard.adjacentCellsAvailable(
+              this.currentPlayer.shipFoundPosition,
+            )
+          ) {
+            this.currentPlayer.shipFoundPosition = null;
+          }
         }
       } else {
         console.log("no ship");
@@ -234,7 +263,8 @@ class Game {
     updateBoard(this.nextPlayer);
 
     if (this.#isComputer(this.currentPlayer)) {
-      setTimeout(() => this.#tryComputerSelection(), 100);
+      // setTimeout(() => this.#tryComputerSelection(), 1);
+      this.#tryComputerSelection();
     } else {
       this.#setEvents(this.nextPlayer);
     }
