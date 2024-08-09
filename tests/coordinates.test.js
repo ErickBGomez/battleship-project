@@ -1,5 +1,6 @@
 import Coordinates from "../src/js/coordinates.js";
 import InvalidCoordinatesError from "../src/js/errors/invalidCoordinatesError.js";
+import OutOfBoundsError from "../src/js/errors/outOfBoundsError.js";
 
 describe("Coordinates tests", () => {
   test("Valid coordinates format", () => {
@@ -100,5 +101,37 @@ describe("Random coordinates tests", () => {
     expect(
       Coordinates.randomCoordinates({ min: 0, max: 9 }, { min: 0, max: 9 }),
     ).toBeDefined();
+  });
+});
+
+describe("Moved coordinates tests", () => {
+  test("Move one step down: A1 -> A2", () => {
+    expect(Coordinates.getMoved(new Coordinates("A1"), "down", 1)).toEqual({
+      value: "A2",
+    });
+  });
+
+  test("Move two steps right: A1 -> C1", () => {
+    expect(Coordinates.getMoved(new Coordinates("A1"), "right", 2)).toEqual({
+      value: "C1",
+    });
+  });
+
+  test("Move three steps up: J10 -> J7", () => {
+    expect(Coordinates.getMoved(new Coordinates("J10"), "up", 3)).toEqual({
+      value: "J7",
+    });
+  });
+
+  test("Move four steps left: J10 -> F10", () => {
+    expect(Coordinates.getMoved(new Coordinates("J10"), "left", 4)).toEqual({
+      value: "F10",
+    });
+  });
+
+  test("Invalid coordinates should throw an error, provoked by out of bounds coordinates", () => {
+    expect(() =>
+      Coordinates.getMoved(new Coordinates("A1"), "left", 1),
+    ).toThrow(InvalidCoordinatesError);
   });
 });
