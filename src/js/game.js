@@ -75,9 +75,6 @@ class Game {
   }
 
   #handleTurn(coordinates) {
-    console.log(
-      `[${this.currentPlayer.name} ${this.currentPlayer.id}: ${coordinates.value}]`,
-    );
     try {
       // Perform attack and show it in the next player's board
       this.nextPlayer.gameboard.receiveAttack(coordinates);
@@ -89,7 +86,6 @@ class Game {
       }
 
       if (this.nextPlayer.gameboard.cellContainsShip(coordinates)) {
-        console.log("ship");
         if (this.#bothPlayersHuman()) {
           // When current attack hits a ship and both players are human,
           // don't stop current player's turn when they hit consecutive cells with a ship
@@ -129,13 +125,11 @@ class Game {
                 this.currentPlayer.shipFoundPosition,
               )
             ) {
-              console.log("DOOR STUCK");
               this.currentPlayer.shipFoundPosition = null;
             }
           }
         }
       } else {
-        console.log("no ship");
         // Only show "Next player" button when both players are human
         if (this.#bothPlayersHuman()) showButton("attack");
 
@@ -153,7 +147,6 @@ class Game {
             this.currentPlayer.shipFoundPosition,
           )
         ) {
-          console.log("no adjacents");
           this.currentPlayer.shipFoundPosition = null;
         }
 
