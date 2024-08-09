@@ -32,8 +32,7 @@ class Game {
 
   constructor(vsComputer) {
     if (vsComputer) {
-      // this.#players.push(new Player(1, "Player"));
-      this.#players.push(new ComputerPlayer(1, "CPU", "hard"));
+      this.#players.push(new Player(1, "Player"));
       this.#players.push(new ComputerPlayer(2, "CPU", "hard"));
     } else {
       this.#players.push(new Player(1, "Player 1"));
