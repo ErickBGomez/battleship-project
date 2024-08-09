@@ -55,8 +55,7 @@ class Gameboard {
   }
 
   #validatePlacement(ship, coordinates, direction) {
-    let currentColumn = coordinates.columnIndex;
-    let currentRow = coordinates.rowIndex;
+    let [currentColumn, currentRow] = coordinates.valueAsArray;
 
     for (let i = 0; i < ship.length; i++) {
       // Error: Ship out of bounds
@@ -99,16 +98,17 @@ class Gameboard {
     return column >= 0 && column <= 9 && row >= 0 && row <= 9;
   }
 
+  // static adjacentCellsAvailable(coordinates) {}
+
   isCellAvailable(coordinates) {
-    return this.#isCellAvailable(coordinates.columnIndex, coordinates.rowIndex);
+    return this.#isCellAvailable(...coordinates.valueAsArray);
   }
 
   placeShip(ship, coordinates = new Coordinates("A1"), direction = "down") {
     // Throw error and avoid placing the ship
     this.#validatePlacement(ship, coordinates, direction);
 
-    let currentColumn = coordinates.columnIndex;
-    let currentRow = coordinates.rowIndex;
+    let [currentColumn, currentRow] = coordinates.valueAsArray;
 
     for (let i = 0; i < ship.length; i++) {
       // Place ship
@@ -141,7 +141,7 @@ class Gameboard {
   }
 
   receiveAttack(coordinates) {
-    if (!Gameboard.inBounds(coordinates.columnIndex, coordinates.rowIndex)) {
+    if (!Gameboard.inBounds(...coordinates.valueAsArray)) {
       throw new OutOfBoundsError("Attack coordinates is out of bounds");
     }
 

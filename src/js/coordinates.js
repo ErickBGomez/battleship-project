@@ -25,13 +25,17 @@ class Coordinates {
     return this.#row;
   }
 
-  // Private methods
+  get valueAsArray() {
+    return [this.#column, this.#row];
+  }
+
+  // Private functions
   #parse() {
     this.#column = this.value.charCodeAt(0) - 65;
     this.#row = Number(this.value.slice(1)) - 1;
   }
 
-  // Methods
+  // Public functions
   static randomCoordinates(
     column = { min: 0, max: 1 },
     row = { min: 0, max: 1 },
