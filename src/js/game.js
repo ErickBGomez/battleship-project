@@ -92,12 +92,12 @@ class Game {
 
         this.#swapNextPlayer();
       } else if (this.#bothPlayersHuman()) {
-        // When both players are human, don't stop current player's turn when they hit
-        // consecutive cells with a ship
+        // When current attack hits a ship and both players are human,
+        // don't stop current player's turn when they hit consecutive cells with a ship
         this.#playTurn();
       }
 
-      // Avoid pausing the game when is the computer's turn
+      // Only pause the round when both players are human
       if (!this.#bothPlayersHuman()) {
         this.#playTurn();
       }
