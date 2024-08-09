@@ -20,7 +20,7 @@ import { randomDirection } from "./utils";
 7. Add delays and animations
 8. Drag and drop ship placement
 
-9. Avoid loop when all adjacent cells are not available
+9. In some conditions, there is another type of loop bug. Find a way to know the conditions and fix it
   */
 
 class Game {
