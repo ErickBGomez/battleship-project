@@ -95,11 +95,15 @@ class Game {
           // don't stop current player's turn when they hit consecutive cells with a ship
           this.#playTurn();
         } else if (this.#isComputer(this.currentPlayer)) {
-          this.currentPlayer.shipFoundPosition = this.nextPlayer.gameboard
-            .getCellByCoordinates(coordinates)
-            .ship.isSunk()
-            ? null
-            : coordinates;
+          this.currentPlayer.shipFoundPosition =
+            this.nextPlayer.gameboard.adjacentCellsAvailable(
+              this.currentPlayer.shipFoundPosition,
+            ) &&
+            !this.nextPlayer.gameboard
+              .getCellByCoordinates(coordinates)
+              .ship.isSunk()
+              ? coordinates
+              : null;
         }
       } else {
         console.log("no ship");
@@ -230,7 +234,7 @@ class Game {
     updateBoard(this.nextPlayer);
 
     if (this.#isComputer(this.currentPlayer)) {
-      setTimeout(() => this.#tryComputerSelection(), 10);
+      setTimeout(() => this.#tryComputerSelection(), 100);
     } else {
       this.#setEvents(this.nextPlayer);
     }
