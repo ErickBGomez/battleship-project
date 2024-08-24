@@ -273,6 +273,8 @@ class Game {
     });
   }
 
+  // Public functions
+
   setupGame() {
     this.#setActionButtons();
 
