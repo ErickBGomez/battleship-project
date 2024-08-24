@@ -75,11 +75,25 @@ button {
   padding-right: 8px;
 }
 
+.board.small {
+  grid-template: repeat(10, 20px) / repeat(10, 20px);
+}
+
+.board.small .column,
+.board.small .row,
+.board.small .offset {
+  display: none;
+}
+
 .cells {
   grid-area: 2 / 2 / -1 / -1;
   display: grid;
   grid-template: repeat(10, auto) / repeat(10, auto);
   gap: 1px;
+}
+
+.board.small .cells {
+  grid-area: 1 / 1 / -1 / -1;
 }
 
 .cell {
