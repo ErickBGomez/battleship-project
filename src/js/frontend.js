@@ -155,7 +155,7 @@ function createButtons() {
   container.appendChild(confirmPlacement);
   container.appendChild(confirmAttack);
 
-  document.body.appendChild(container);
+  return container;
 }
 
 function showButton(className) {
@@ -220,6 +220,7 @@ function createLeftSidebar() {
 function createRightSidebar() {
   const container = document.createElement("div");
   container.classList.add("right");
+  container.appendChild(createButtons());
 
   document.body.appendChild(container);
 }

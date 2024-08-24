@@ -18,10 +18,11 @@ body {
   color: var(--White);
   background-color: var(--White);
   display: flex;
-  gap: 25px;
   justify-content: center;
   min-height: 100vh;
   background-color: #232830;
+  margin: 0;
+  padding: 45px 0;
 }
 
 p,
