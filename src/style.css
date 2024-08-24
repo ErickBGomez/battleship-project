@@ -47,6 +47,7 @@ button {
 
 .boards-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   max-width: 850px;
   width: 100%;
