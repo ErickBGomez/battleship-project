@@ -58,6 +58,7 @@ button {
 
 .right {
   align-items: start;
+  justify-content: space-between;
 }
 
 .boards-container {

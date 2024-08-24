@@ -234,6 +234,24 @@ function createShipsCounter(playerId, svg) {
   return container;
 }
 
+function createTimer() {
+  const container = document.createElement("div");
+  container.classList.add("timer");
+
+  const icon = document.createElement("span");
+  icon.classList.add("icon");
+  icon.textContent = "T";
+
+  const value = document.createElement("span");
+  value.classList.add("value");
+  value.textContent = "0:00";
+
+  container.appendChild(icon);
+  container.appendChild(value);
+
+  return container;
+}
+
 function createLeftSidebar() {
   const container = document.createElement("div");
   container.classList.add("left");
@@ -247,6 +265,8 @@ function createLeftSidebar() {
 function createRightSidebar() {
   const container = document.createElement("div");
   container.classList.add("right");
+
+  container.appendChild(createTimer());
   container.appendChild(createButtons());
 
   document.body.appendChild(container);
