@@ -168,16 +168,17 @@ function showButton(className) {
   button.classList.toggle("hidden");
 }
 
-function createBoard(player) {
+function createBoard(smallBoard = false) {
   const boardsContainer = document.querySelector(".boards-container");
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
-  container.dataset.player = player.id;
 
   const playerName = document.createElement("h1");
+  playerName.textContent = "P's Board";
 
   const board = document.createElement("div");
   board.classList.add("board");
+  if (smallBoard) board.classList.add("small");
 
   board.appendChild(setCells());
 

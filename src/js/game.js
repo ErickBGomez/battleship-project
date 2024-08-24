@@ -274,8 +274,6 @@ class Game {
   }
 
   setupGame() {
-    this.#players.forEach((player) => createBoard(player));
-
     this.#setActionButtons();
 
     // Start game with current player placement
