@@ -210,9 +210,36 @@ function createBoardsContainer() {
   document.body.appendChild(container);
 }
 
+function createShipsCounter(playerId, svg) {
+  const container = document.createElement("div");
+  container.classList.add("ships");
+  container.dataset.playerId = playerId;
+
+  const icon = document.createElement("span");
+  icon.classList.add("icon");
+  icon.textContent = svg;
+
+  const xMark = document.createElement("span");
+  xMark.classList.add("x-mark");
+  xMark.textContent = " X ";
+
+  const counter = document.createElement("span");
+  counter.classList.add("counter");
+  counter.textContent = 0;
+
+  container.appendChild(icon);
+  container.appendChild(xMark);
+  container.appendChild(counter);
+
+  return container;
+}
+
 function createLeftSidebar() {
   const container = document.createElement("div");
   container.classList.add("left");
+
+  container.appendChild(createShipsCounter(1, "P1"));
+  container.appendChild(createShipsCounter(2, "P2"));
 
   document.body.appendChild(container);
 }
