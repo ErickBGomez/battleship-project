@@ -1,3 +1,10 @@
+function parseTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
+  return `0${minutes}:0${seconds}`;
+}
+
 function randomRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -29,4 +36,4 @@ function randomDirection() {
   return value;
 }
 
-export { randomRange, randomDirection };
+export { parseTime, randomRange, randomDirection };
