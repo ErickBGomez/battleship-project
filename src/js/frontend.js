@@ -210,8 +210,24 @@ function createBoardsContainer() {
   document.body.appendChild(container);
 }
 
+function createLeftSidebar() {
+  const container = document.createElement("div");
+  container.classList.add("left");
+
+  document.body.appendChild(container);
+}
+
+function createRightSidebar() {
+  const container = document.createElement("div");
+  container.classList.add("right");
+
+  document.body.appendChild(container);
+}
+
 export {
   createBoardsContainer,
+  createLeftSidebar,
+  createRightSidebar,
   createButtons,
   showButton,
   createBoard,

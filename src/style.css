@@ -18,8 +18,6 @@ body {
   color: var(--White);
   background-color: var(--White);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 25px;
   justify-content: center;
   min-height: 100vh;
@@ -45,13 +43,17 @@ button {
   cursor: pointer;
 }
 
+.left,
+.right {
+  max-width: 250px;
+  width: 100%;
+}
+
 .boards-container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 850px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 .gameboard-container {

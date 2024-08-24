@@ -4,9 +4,13 @@ import {
   createBoard,
   createBoardsContainer,
   createButtons,
+  createLeftSidebar,
+  createRightSidebar,
 } from "./js/frontend";
 
+createLeftSidebar();
 createBoardsContainer();
+createRightSidebar();
 createBoard();
 createBoard(true);
 createButtons();
