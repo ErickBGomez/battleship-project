@@ -17,7 +17,7 @@ function updateBoard(player) {
   const board = gameboardContainer.querySelector(".board");
 
   updateCells(board, player, player.state);
-  updateBoardInfo(gameboardContainer, player.gameboard);
+  updateBoardInfo(gameboardContainer, player.name, player.gameboard);
 }
 
 function updateCells(board, player) {
@@ -48,6 +48,16 @@ function updateCells(board, player) {
 
     if (gameCell.hit) cell.classList.add("hit");
   });
+}
+
+function updateBoardInfo(container, name, gameboard) {
+  const playerName = container.querySelector(".player-name");
+  const failedHits = container.querySelector(".failed-hits .value");
+  const availableShips = container.querySelector(".available-ships .value");
+
+  playerName.textContent = name;
+  failedHits.textContent = gameboard.failedHits;
+  availableShips.textContent = gameboard.availableShips;
 }
 
 function setCells() {
@@ -108,14 +118,6 @@ function createBoardInfo() {
   return container;
 }
 
-function updateBoardInfo(container, gameboard) {
-  const failedHits = container.querySelector(".failed-hits .value");
-  const availableShips = container.querySelector(".available-ships .value");
-
-  failedHits.textContent = gameboard.failedHits;
-  availableShips.textContent = gameboard.availableShips;
-}
-
 function createBoardLabels() {
   const labels = [];
 
@@ -167,8 +169,18 @@ function createBoard(smallBoard = false) {
   container.classList.add("gameboard-container");
   if (smallBoard) container.classList.add("small");
 
-  const playerName = document.createElement("h1");
-  playerName.textContent = "P's Board";
+  const boardTitle = document.createElement("h1");
+  boardTitle.classList.add("title");
+
+  const playerName = document.createElement("span");
+  playerName.classList.add("player-name");
+
+  const titleContent = document.createElement("span");
+  titleContent.classList.add("title-content");
+  titleContent.textContent = "'s Board";
+
+  boardTitle.appendChild(playerName);
+  boardTitle.appendChild(titleContent);
 
   const board = document.createElement("div");
   board.classList.add("board");
@@ -184,7 +196,7 @@ function createBoard(smallBoard = false) {
 
   const info = createBoardInfo();
 
-  container.appendChild(playerName);
+  container.appendChild(boardTitle);
   container.appendChild(board);
   container.appendChild(info);
 
