@@ -8,21 +8,12 @@ function getBoardCells(player) {
   );
 }
 
-function updateBoardSize(board, state) {
-  if (state === "waiting") {
-    board.classList.add("small");
-  }
-
-  board.classList.remove("small");
-}
-
 function updateBoard(player) {
   const gameboardContainer = document.querySelector(
     `.gameboard-container[data-player="${player.id}"]`,
   );
   const board = gameboardContainer.querySelector(".board");
 
-  updateBoardSize(board, player.state);
   updateCells(board, player, player.state);
   updateBoardInfo(gameboardContainer, player.gameboard);
 }
