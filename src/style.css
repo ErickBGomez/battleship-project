@@ -75,13 +75,13 @@ button {
   padding-right: 8px;
 }
 
-.board.small {
+.gameboard-container.small .board {
   grid-template: repeat(10, 20px) / repeat(10, 20px);
 }
 
-.board.small .column,
-.board.small .row,
-.board.small .offset {
+.gameboard-container.small .board .column,
+.gameboard-container.small .board .row,
+.gameboard-container.small .board .offset {
   display: none;
 }
 
@@ -92,7 +92,7 @@ button {
   gap: 1px;
 }
 
-.board.small .cells {
+.gameboard-container.small .board .cells {
   grid-area: 1 / 1 / -1 / -1;
 }
 

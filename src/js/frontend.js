@@ -2,16 +2,18 @@ import Coordinates from "./coordinates";
 
 const offset = 65;
 
-function getBoardCells(player) {
-  return document.querySelectorAll(
-    `.gameboard-container[data-player="${player.id}"] .cell`,
+function getGameboardContainer(state) {
+  return document.querySelector(
+    `.gameboard-container${state === "waiting" ? ".small" : ""}`,
   );
 }
 
+function getBoardCells(player) {
+  return getGameboardContainer(player.state).querySelectorAll(".cell");
+}
+
 function updateBoard(player) {
-  const gameboardContainer = document.querySelector(
-    `.gameboard-container[data-player="${player.id}"]`,
-  );
+  const gameboardContainer = getGameboardContainer(player.state);
   const board = gameboardContainer.querySelector(".board");
 
   updateCells(board, player, player.state);
@@ -163,13 +165,13 @@ function createBoard(smallBoard = false) {
   const boardsContainer = document.querySelector(".boards-container");
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
+  if (smallBoard) container.classList.add("small");
 
   const playerName = document.createElement("h1");
   playerName.textContent = "P's Board";
 
   const board = document.createElement("div");
   board.classList.add("board");
-  if (smallBoard) board.classList.add("small");
 
   board.appendChild(setCells());
 
