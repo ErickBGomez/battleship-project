@@ -169,7 +169,7 @@ function createBoard(smallBoard = false) {
   container.classList.add("gameboard-container");
   if (smallBoard) container.classList.add("small");
 
-  const boardTitle = document.createElement("h1");
+  const boardTitle = document.createElement(smallBoard ? "h2" : "h1");
   boardTitle.classList.add("title");
 
   const playerName = document.createElement("span");
