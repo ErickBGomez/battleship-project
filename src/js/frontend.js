@@ -94,19 +94,19 @@ function createBoardInfoLabel(className, label, value) {
   return container;
 }
 
-function createBoardInfo(gameboard) {
+function createBoardInfo() {
   const container = document.createElement("div");
   container.classList.add("info");
 
   const availableShips = createBoardInfoLabel(
     "available-ships",
     "Available ships",
-    gameboard.availableShips,
+    0,
   );
   const failedHits = createBoardInfoLabel(
     "failed-hits",
     "Failed hits received",
-    gameboard.failedHits,
+    0,
   );
 
   container.appendChild(availableShips);
@@ -175,12 +175,11 @@ function createBoard(player) {
   container.dataset.player = player.id;
 
   const playerName = document.createElement("h1");
-  playerName.textContent = player.name;
 
   const board = document.createElement("div");
   board.classList.add("board");
 
-  board.appendChild(setCells(player));
+  board.appendChild(setCells());
 
   const labelsOffset = document.createElement("div");
   labelsOffset.classList.add("offset");
@@ -189,7 +188,7 @@ function createBoard(player) {
   const labels = createBoardLabels();
   labels.forEach((label) => board.appendChild(label));
 
-  const info = createBoardInfo(player.gameboard);
+  const info = createBoardInfo();
 
   container.appendChild(playerName);
   container.appendChild(board);
