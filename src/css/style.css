@@ -153,6 +153,12 @@ button.hidden {
   display: none;
 }
 
+.ships {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .timer {
   display: flex;
   align-items: center;

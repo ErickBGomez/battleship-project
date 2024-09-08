@@ -211,14 +211,15 @@ function createBoardsContainer() {
   document.body.appendChild(container);
 }
 
-function createShipsCounter(playerId, svg) {
+function createShipsCounter(playerId, icon = "sailing") {
   const container = document.createElement("div");
   container.classList.add("ships");
   container.dataset.playerId = playerId;
 
-  const icon = document.createElement("span");
-  icon.classList.add("icon");
-  icon.textContent = svg;
+  const iconElement = document.createElement("i");
+  iconElement.classList.add("icon");
+  iconElement.classList.add("material-symbols-outlined");
+  iconElement.textContent = icon;
 
   const xMark = document.createElement("span");
   xMark.classList.add("x-mark");
@@ -228,7 +229,7 @@ function createShipsCounter(playerId, svg) {
   counter.classList.add("counter");
   counter.textContent = 0;
 
-  container.appendChild(icon);
+  container.appendChild(iconElement);
   container.appendChild(xMark);
   container.appendChild(counter);
 
@@ -263,8 +264,8 @@ function createLeftSidebar() {
   const container = document.createElement("div");
   container.classList.add("left");
 
-  container.appendChild(createShipsCounter(1, "P1"));
-  container.appendChild(createShipsCounter(2, "P2"));
+  container.appendChild(createShipsCounter(1));
+  container.appendChild(createShipsCounter(2));
 
   document.body.appendChild(container);
 }
