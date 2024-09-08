@@ -1,4 +1,5 @@
-import "./style.css";
+import "./css/style.css";
+import "./css/material-icons.css";
 import Game from "./js/game";
 import {
   createBoard,

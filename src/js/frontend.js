@@ -239,13 +239,14 @@ function createTimer() {
   const container = document.createElement("div");
   container.classList.add("timer");
 
-  const icon = document.createElement("span");
+  const icon = document.createElement("i");
   icon.classList.add("icon");
-  icon.textContent = "T";
+  icon.classList.add("material-symbols-outlined");
+  icon.textContent = "timer";
 
   const value = document.createElement("span");
   value.classList.add("value");
-  value.textContent = "0:00";
+  value.textContent = "00:00";
 
   container.appendChild(icon);
   container.appendChild(value);
@@ -254,7 +255,7 @@ function createTimer() {
 }
 
 function updateTimer(seconds) {
-  const timer = document.querySelector(".timer");
+  const timer = document.querySelector(".timer .value");
   timer.textContent = parseTime(seconds);
 }
 
