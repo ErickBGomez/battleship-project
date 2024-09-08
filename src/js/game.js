@@ -4,11 +4,12 @@ import {
   getBoardCells,
   showButton,
   updateBoard,
+  updateTimer,
 } from "./frontend";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";
-import { randomDirection } from "./utils";
+import { parseTime, randomDirection } from "./utils";
 
 /* TODO:
 1. Advanced computer behavior when hitting a ship
@@ -27,6 +28,8 @@ class Game {
   #playerFlag = false;
 
   #placeShipsTurns = 0;
+
+  #time = 0;
 
   constructor(vsComputer) {
     if (vsComputer) {
@@ -229,6 +232,8 @@ class Game {
   }
 
   #playTurn() {
+    setInterval(() => this.#countTime(), 1000);
+
     this.currentPlayer.state = "attacking";
     this.nextPlayer.state = "waiting";
 
@@ -271,6 +276,11 @@ class Game {
 
       this.#playTurn();
     });
+  }
+
+  #countTime() {
+    this.#time++;
+    updateTimer(this.#time);
   }
 
   // Public functions

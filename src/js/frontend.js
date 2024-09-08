@@ -1,4 +1,5 @@
 import Coordinates from "./coordinates";
+import { parseTime } from "./utils";
 
 const offset = 65;
 
@@ -252,6 +253,11 @@ function createTimer() {
   return container;
 }
 
+function updateTimer(seconds) {
+  const timer = document.querySelector(".timer");
+  timer.textContent = parseTime(seconds);
+}
+
 function createLeftSidebar() {
   const container = document.createElement("div");
   container.classList.add("left");
@@ -280,5 +286,6 @@ export {
   showButton,
   createBoard,
   updateBoard,
+  updateTimer,
   getBoardCells,
 };
