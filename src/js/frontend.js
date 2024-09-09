@@ -82,46 +82,6 @@ function setCells() {
   return container;
 }
 
-function createBoardInfoLabel(className, label, value) {
-  const container = document.createElement("div");
-  container.classList.add("info-container");
-  container.classList.add(className);
-
-  const labelElement = document.createElement("p");
-  labelElement.classList.add("label");
-  labelElement.textContent = `${label}: `;
-
-  const valueElement = document.createElement("p");
-  valueElement.classList.add("value");
-  valueElement.textContent = value;
-
-  container.appendChild(labelElement);
-  container.appendChild(valueElement);
-
-  return container;
-}
-
-function createBoardInfo() {
-  const container = document.createElement("div");
-  container.classList.add("info");
-
-  const availableShips = createBoardInfoLabel(
-    "available-ships",
-    "Available ships",
-    0,
-  );
-  const failedHits = createBoardInfoLabel(
-    "failed-hits",
-    "Failed hits received",
-    0,
-  );
-
-  container.appendChild(availableShips);
-  container.appendChild(failedHits);
-
-  return container;
-}
-
 function createBoardLabels() {
   const labels = [];
 
@@ -198,11 +158,8 @@ function createBoard(smallBoard = false) {
   const labels = createBoardLabels();
   labels.forEach((label) => board.appendChild(label));
 
-  const info = createBoardInfo();
-
   container.appendChild(boardTitle);
   container.appendChild(board);
-  container.appendChild(info);
 
   boardsContainer.appendChild(container);
 }
