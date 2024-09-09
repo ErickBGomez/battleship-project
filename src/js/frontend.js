@@ -223,7 +223,7 @@ function createShipsCounter(playerId, icon = "sailing") {
 
   const xMark = document.createElement("span");
   xMark.classList.add("x-mark");
-  xMark.textContent = " X ";
+  xMark.textContent = `P${playerId} X`;
 
   const counter = document.createElement("span");
   counter.classList.add("counter");
