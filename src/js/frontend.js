@@ -18,7 +18,8 @@ function updateBoard(player) {
   const board = gameboardContainer.querySelector(".board");
 
   updateCells(board, player, player.state);
-  updateBoardInfo(gameboardContainer, player.name, player.gameboard);
+  updateBoardTitle(gameboardContainer, player.name);
+  updateShipCount(player.id, player.gameboard.availableShips);
 }
 
 function updateCells(board, player) {
@@ -51,14 +52,16 @@ function updateCells(board, player) {
   });
 }
 
-function updateBoardInfo(container, name, gameboard) {
+function updateBoardTitle(container, name) {
   const playerName = container.querySelector(".player-name");
-  const failedHits = container.querySelector(".failed-hits .value");
-  const availableShips = container.querySelector(".available-ships .value");
-
   playerName.textContent = name;
-  failedHits.textContent = gameboard.failedHits;
-  availableShips.textContent = gameboard.availableShips;
+}
+
+function updateShipCount(playerId, availableShips) {
+  const availableShipsElement = document.querySelector(
+    `.ships[data-player-id="${playerId}"] .value`,
+  );
+  availableShipsElement.textContent = availableShips;
 }
 
 function setCells() {
@@ -226,7 +229,7 @@ function createShipsCounter(playerId, icon = "sailing") {
   xMark.textContent = `P${playerId} X`;
 
   const counter = document.createElement("span");
-  counter.classList.add("counter");
+  counter.classList.add("value");
   counter.textContent = 0;
 
   container.appendChild(iconElement);
@@ -288,6 +291,7 @@ export {
   showButton,
   createBoard,
   updateBoard,
+  updateShipCount,
   updateTimer,
   getBoardCells,
 };
