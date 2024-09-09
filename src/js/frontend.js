@@ -291,7 +291,6 @@ export {
   showButton,
   createBoard,
   updateBoard,
-  updateShipCount,
   updateTimer,
   getBoardCells,
 };
