@@ -80,6 +80,7 @@ class Game {
       // Perform attack and show it in the next player's board
       this.nextPlayer.gameboard.receiveAttack(coordinates);
       updateBoard(this.nextPlayer, this.#state);
+      updateBoard(this.currentPlayer, this.#state);
 
       if (this.#checkWin()) {
         alert("Game over!");
@@ -120,6 +121,7 @@ class Game {
         // Hide current player's ship when their turn ended
         this.currentPlayer.state = "waiting";
         updateBoard(this.currentPlayer, this.#state);
+        updateBoard(this.nextPlayer, this.#state);
 
         // Computers can get stuck in a loop when the adjacent cells to the last saved position of a
         // ship found are not available. So, that position is deleted and the computer can keep

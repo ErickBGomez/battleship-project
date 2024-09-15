@@ -3,9 +3,14 @@ import { parseTime } from "./utils";
 
 const offset = 65;
 
-function getGameboardContainer(state) {
+function getGameboardContainer(playerState, gameState) {
   return document.querySelector(
-    `.gameboard-container${state === "waiting" ? ".small" : ""}`,
+    `.gameboard-container${
+      (playerState === "waiting" && gameState === "placing") ||
+      (playerState === "attacking" && gameState === "attacking")
+        ? ".small"
+        : ""
+    }`,
   );
 }
 
@@ -14,7 +19,7 @@ function getBoardCells(player) {
 }
 
 function updateBoard(player, gameState = "attacking") {
-  const gameboardContainer = getGameboardContainer(player.state);
+  const gameboardContainer = getGameboardContainer(player.state, gameState);
   const board = gameboardContainer.querySelector(".board");
 
   if (gameState === "placing" && player.state === "waiting") {
