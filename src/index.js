@@ -16,6 +16,6 @@ createBoard();
 createBoard(true);
 createButtons();
 
-const game = new Game(true);
+const game = new Game(confirm("vs Computer?"));
 
 game.setupGame();
