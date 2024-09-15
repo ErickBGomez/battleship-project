@@ -13,9 +13,17 @@ function getBoardCells(player) {
   return getGameboardContainer(player.state).querySelectorAll(".cell");
 }
 
-function updateBoard(player) {
+function updateBoard(player, gameState = "attacking") {
   const gameboardContainer = getGameboardContainer(player.state);
   const board = gameboardContainer.querySelector(".board");
+
+  if (gameState === "placing" && player.state === "waiting") {
+    gameboardContainer.classList.add("hidden");
+    return;
+  }
+
+  // Show gameboard if it was hidden before
+  gameboardContainer.classList.remove("hidden");
 
   updateCells(board, player, player.state);
   updateBoardTitle(gameboardContainer, player.name);

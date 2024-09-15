@@ -44,7 +44,7 @@ button {
   cursor: pointer;
 }
 
-.hidden {
+.gameboard-container.hidden {
   display: none;
 }
 

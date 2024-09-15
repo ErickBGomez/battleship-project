@@ -28,7 +28,7 @@ class Game {
 
   #placeShipsTurns = 0;
 
-  #state;
+  #state = "placing";
 
   #time = 0;
 
@@ -79,7 +79,7 @@ class Game {
     try {
       // Perform attack and show it in the next player's board
       this.nextPlayer.gameboard.receiveAttack(coordinates);
-      updateBoard(this.nextPlayer);
+      updateBoard(this.nextPlayer, this.#state);
 
       if (this.#checkWin()) {
         alert("Game over!");
@@ -119,7 +119,7 @@ class Game {
 
         // Hide current player's ship when their turn ended
         this.currentPlayer.state = "waiting";
-        updateBoard(this.currentPlayer);
+        updateBoard(this.currentPlayer, this.#state);
 
         // Computers can get stuck in a loop when the adjacent cells to the last saved position of a
         // ship found are not available. So, that position is deleted and the computer can keep
@@ -172,6 +172,7 @@ class Game {
   }
 
   #placeShips() {
+    this.#state = "placing";
     this.currentPlayer.state = "placing";
     this.nextPlayer.state = "waiting";
 
@@ -227,7 +228,7 @@ class Game {
       }
     }
 
-    updateBoard(this.currentPlayer);
+    updateBoard(this.currentPlayer, this.#state);
 
     if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
@@ -238,8 +239,8 @@ class Game {
     this.currentPlayer.state = "attacking";
     this.nextPlayer.state = "waiting";
 
-    updateBoard(this.currentPlayer);
-    updateBoard(this.nextPlayer);
+    updateBoard(this.currentPlayer, this.#state);
+    updateBoard(this.nextPlayer, this.#state);
 
     if (this.#isComputer(this.currentPlayer)) {
       this.#tryComputerSelection();
@@ -286,10 +287,18 @@ class Game {
     updateTimer(this.#time);
   }
 
+  #setupPlayers() {
+    this.currentPlayer.state = "waiting";
+    this.nextPlayer.state = "waiting";
+
+    updateBoard(this.currentPlayer, this.#state);
+    updateBoard(this.nextPlayer, this.#state);
+  }
   // Public functions
 
   setupGame() {
     this.#setActionButtons();
+    this.#setupPlayers();
 
     // Start game with current player placement
     this.#placeShips();
