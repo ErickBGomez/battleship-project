@@ -7,7 +7,8 @@ function getGameboardContainer(playerState, gameState) {
   return document.querySelector(
     `.gameboard-container${
       (playerState === "waiting" && gameState === "placing") ||
-      (playerState === "attacking" && gameState === "attacking")
+      (playerState === "attacking" &&
+        (gameState === "attacking" || gameState === "waiting"))
         ? ".small"
         : ""
     }`,
@@ -30,12 +31,12 @@ function updateBoard(player, gameState = "attacking") {
   // Show gameboard if it was hidden before
   gameboardContainer.classList.remove("hidden");
 
-  updateCells(board, player, player.state);
+  updateCells(board, player, gameState);
   updateBoardTitle(gameboardContainer, player.name);
   updateShipCount(player.id, player.gameboard.availableShips);
 }
 
-function updateCells(board, player) {
+function updateCells(board, player, gameState) {
   const cells = board.querySelectorAll(".cell");
 
   cells.forEach((cl) => {
@@ -52,7 +53,7 @@ function updateCells(board, player) {
 
     if (gameCell.ship) {
       if (
-        player.state === "attacking" ||
+        (player.state === "attacking" && gameState !== "waiting") ||
         player.state === "placing" ||
         gameCell.hit
       ) {

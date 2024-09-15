@@ -81,6 +81,7 @@ class Game {
       this.nextPlayer.gameboard.receiveAttack(coordinates);
       updateBoard(this.nextPlayer, this.#state);
       updateBoard(this.currentPlayer, this.#state);
+      this.#state = "waiting";
 
       if (this.#checkWin()) {
         alert("Game over!");
@@ -115,9 +116,6 @@ class Game {
           }
         }
       } else {
-        // Only show "Next player" button when both players are human
-        if (this.#bothPlayersHuman()) showButton("attack");
-
         // Hide current player's ship when their turn ended
         this.currentPlayer.state = "waiting";
         updateBoard(this.currentPlayer, this.#state);
@@ -140,9 +138,9 @@ class Game {
       }
 
       // Only pause the round when both players are human
-      if (!this.#bothPlayersHuman()) {
-        this.#playTurn();
-      }
+      if (!this.#bothPlayersHuman()) this.#playTurn();
+      // Only show "Next player" button when both players are human
+      else showButton("attack");
     } catch (error) {
       console.error(error.message);
     }
