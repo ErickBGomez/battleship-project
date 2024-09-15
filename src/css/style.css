@@ -44,6 +44,10 @@ button {
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}
+
 .left,
 .right {
   display: flex;
@@ -147,10 +151,6 @@ button {
   border: none;
   border-radius: 4px;
   padding: 8px;
-}
-
-button.hidden {
-  display: none;
 }
 
 .ships {
