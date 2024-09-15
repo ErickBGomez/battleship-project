@@ -53,7 +53,7 @@ function updateCells(board, player, gameState) {
 
     if (gameCell.ship) {
       if (
-        (player.state === "attacking" && gameState !== "waiting") ||
+        player.state === "attacking" ||
         player.state === "placing" ||
         gameCell.hit
       ) {

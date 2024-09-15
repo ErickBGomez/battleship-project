@@ -116,6 +116,10 @@ class Game {
           }
         }
       } else {
+        // Only show "Next player" button when both players are human
+        // Don't reduce this condition with playTurn, it will freeze the game when hitting a ship
+        if (this.#bothPlayersHuman()) showButton("attack");
+
         // Hide current player's ship when their turn ended
         this.currentPlayer.state = "waiting";
         updateBoard(this.currentPlayer, this.#state);
@@ -138,9 +142,9 @@ class Game {
       }
 
       // Only pause the round when both players are human
-      if (!this.#bothPlayersHuman()) this.#playTurn();
-      // Only show "Next player" button when both players are human
-      else showButton("attack");
+      if (!this.#bothPlayersHuman()) {
+        this.#playTurn();
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -234,8 +238,6 @@ class Game {
   }
 
   #playTurn() {
-    setInterval(() => this.#countTime(), 1000);
-
     this.currentPlayer.state = "attacking";
     this.nextPlayer.state = "waiting";
 
@@ -259,6 +261,7 @@ class Game {
     this.#state = this.#placeShipsTurns >= 2 ? "attacking" : "placing";
 
     if (this.#state === "attacking") {
+      setInterval(() => this.#countTime(), 1000);
       this.#playTurn();
     } else {
       this.#placeShips();
