@@ -1,6 +1,5 @@
 import Player from "./players/player";
 import {
-  createBoard,
   getBoardCells,
   showButton,
   updateBoard,
@@ -9,7 +8,7 @@ import {
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";
-import { parseTime, randomDirection } from "./utils";
+import { randomDirection } from "./utils";
 
 /* TODO:
 1. Advanced computer behavior when hitting a ship
