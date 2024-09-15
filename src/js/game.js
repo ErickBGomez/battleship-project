@@ -28,6 +28,8 @@ class Game {
 
   #placeShipsTurns = 0;
 
+  #state;
+
   #time = 0;
 
   constructor(vsComputer) {
@@ -253,7 +255,9 @@ class Game {
   }
 
   #decideTurn() {
-    if (this.#placeShipsTurns >= 2) {
+    this.#state = this.#placeShipsTurns >= 2 ? "attacking" : "placing";
+
+    if (this.#state === "attacking") {
       this.#playTurn();
     } else {
       this.#placeShips();
