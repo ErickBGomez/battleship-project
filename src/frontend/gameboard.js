@@ -111,4 +111,4 @@ const createGameBoard = (player) => {
   return gameBoard;
 };
 
-export { createGameBoard };
+export default createGameBoard;

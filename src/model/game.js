@@ -5,7 +5,7 @@ import Player from "./players/player";
 //   updateBoard,
 //   updateTimer,
 // } from "./frontend";
-import Observer from "./observer.js";
+import Observer from "./observer";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";

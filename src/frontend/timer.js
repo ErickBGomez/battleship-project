@@ -5,4 +5,4 @@ function updateTime(time) {
   timeValue.textContent = parseTime(time);
 }
 
-export { updateTime };
+export default updateTime;
