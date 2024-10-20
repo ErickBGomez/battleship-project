@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -13,12 +12,6 @@ module.exports = {
   devServer: {
     static: "./dist",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Battleship | Erick B. Gómez",
-      favicon: "./src/img/erick-notepad.svg",
-    }),
-  ],
   module: {
     rules: [
       {
