@@ -2,7 +2,7 @@
   "name": "battleship-project",
   "version": "1.0.0",
   "description": "The Odin Project: Battleship project",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
@@ -19,6 +19,7 @@
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
+    "html-webpack-plugin": "^5.6.2",
     "jest": "^29.7.0",
     "prettier": "3.2.5",
     "style-loader": "^3.3.3",
