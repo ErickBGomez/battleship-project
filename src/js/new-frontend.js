@@ -76,7 +76,10 @@ const createGameBoard = (playerName) => {
   const gameBoard = document.createElement("div");
   gameBoard.classList.add("gameboard");
 
-  gameBoard.append(createTitle(playerName), createBoard());
+  const actions = document.createElement("div");
+  actions.classList.add("actions");
+
+  gameBoard.append(createTitle(playerName), createBoard(), actions);
 
   return gameBoard;
 };
