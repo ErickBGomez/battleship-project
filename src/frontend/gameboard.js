@@ -94,7 +94,7 @@ function createShipsCounter() {
   return ships;
 }
 
-const createGameBoard = (playerName) => {
+const createGameBoard = (player) => {
   const gameBoard = document.createElement("div");
   gameBoard.classList.add("gameboard");
 
@@ -102,7 +102,7 @@ const createGameBoard = (playerName) => {
   actions.classList.add("actions");
 
   gameBoard.append(
-    createTitle(playerName),
+    createTitle(player.name),
     createBoard(),
     actions,
     createShipsCounter(),

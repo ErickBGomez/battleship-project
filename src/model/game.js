@@ -1,10 +1,11 @@
 import Player from "./players/player";
-import {
-  getBoardCells,
-  showButton,
-  updateBoard,
-  updateTimer,
-} from "./frontend";
+// import {
+//   getBoardCells,
+//   showButton,
+//   updateBoard,
+//   updateTimer,
+// } from "./frontend";
+import Observer from "./observer.js";
 import Ship from "./ship";
 import Coordinates from "./coordinates";
 import ComputerPlayer from "./players/computerPlayer";
@@ -32,6 +33,8 @@ class Game {
 
   #time = 0;
 
+  #observers = [];
+
   constructor(vsComputer) {
     if (vsComputer) {
       this.#players.push(new Player(1, "Player"));
@@ -42,6 +45,7 @@ class Game {
     }
   }
 
+  // Getters and setters
   get players() {
     return this.#players;
   }
@@ -52,6 +56,23 @@ class Game {
 
   get nextPlayer() {
     return this.#players[Number(!this.#playerFlag)];
+  }
+
+  // Observer pattern
+  addObserver(observer) {
+    if (observer instanceof Observer) {
+      this.#observers.push(observer);
+    } else {
+      throw new Error("Observer must be an instance of Observer");
+    }
+  }
+
+  removeObserver(observer) {
+    this.#observers = this.#observers.filter((o) => o !== observer);
+  }
+
+  #notify(event, data) {
+    this.#observers.forEach((observer) => observer.update(event, data));
   }
 
   // Private functions
@@ -268,26 +289,11 @@ class Game {
     }
   }
 
-  #setActionButtons() {
-    const placement = document.querySelector("button.placement");
-    const attack = document.querySelector("button.attack");
-
-    placement.addEventListener("click", (e) => {
-      e.target.classList.toggle("hidden");
-
-      this.#delegateShipPlacement();
-    });
-
-    attack.addEventListener("click", (e) => {
-      e.target.classList.toggle("hidden");
-
-      this.#playTurn();
-    });
-  }
-
   #countTime() {
-    this.#time++;
-    updateTimer(this.#time);
+    setInterval(() => {
+      this.#time++;
+      this.#notify("time", this.#time);
+    }, 1000);
   }
 
   #setupPlayers() {
@@ -297,14 +303,14 @@ class Game {
     updateBoard(this.currentPlayer, this.#state);
     updateBoard(this.nextPlayer, this.#state);
   }
+
   // Public functions
-
   setupGame() {
-    this.#setActionButtons();
-    this.#setupPlayers();
-
+    // this.#setupPlayers();
     // Start game with current player placement
-    this.#placeShips();
+    // this.#placeShips();
+
+    this.#countTime();
   }
 }
 

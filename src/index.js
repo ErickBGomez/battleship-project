@@ -1,12 +1,16 @@
 import "../public/css/style.css";
 import "../public/css/material-symbols.css";
-// import Game from "./js/game";
+import Game from "./model/game";
+import GameObserver from "./frontend/gameObserver";
 import { createGameBoard } from "./frontend/gameboard.js";
 
 const boardsContainer = document.querySelector(".gameboards-container");
 
-// const game = new Game(confirm("vs Computer?"));
+const game = new Game(confirm("vs Computer?"));
+const [player1, player2] = game.players;
+const gameObserver = new GameObserver();
+game.addObserver(gameObserver);
 
-// game.setupGame();
-boardsContainer.append(createGameBoard("Player 1"));
-boardsContainer.append(createGameBoard("Player 2"));
+boardsContainer.append(createGameBoard(player1));
+boardsContainer.append(createGameBoard(player2));
+game.setupGame();
