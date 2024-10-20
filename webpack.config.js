@@ -15,7 +15,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html", // Path to your HTML file
+      template: "./src/index.html",
+      favicon: "./public/img/erick-notepad.svg",
     }),
   ],
   module: {
