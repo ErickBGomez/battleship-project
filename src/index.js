@@ -1,5 +1,5 @@
 import "../public/css/style.css";
-// import "../public/css/material-symbols.css";
+import "../public/css/material-symbols.css";
 // import Game from "./js/game";
 // import {
 //   createBoard,
@@ -8,6 +8,9 @@ import "../public/css/style.css";
 //   createLeftSidebar,
 //   createRightSidebar,
 // } from "./js/frontend";
+import { createGameBoard } from "./js/new-frontend.js";
+
+const boardsContainer = document.querySelector(".gameboards-container");
 
 // createLeftSidebar();
 // createBoardsContainer();
@@ -19,5 +22,4 @@ import "../public/css/style.css";
 // const game = new Game(confirm("vs Computer?"));
 
 // game.setupGame();
-
-console.log("hello");
+boardsContainer.append(createGameBoard("Player 1"));
