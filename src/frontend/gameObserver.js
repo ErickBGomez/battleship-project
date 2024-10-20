@@ -1,5 +1,5 @@
 import Observer from "../model/observer.js";
-import { updateTime } from "./time.js";
+import { updateTime } from "./timer.js";
 
 class GameObserver extends Observer {
   update(event, data) {
