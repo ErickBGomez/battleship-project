@@ -72,6 +72,28 @@ function createBoard() {
   return board;
 }
 
+function createShipsCounter() {
+  const ships = document.createElement("div");
+  ships.classList.add("ships");
+
+  const iconElement = document.createElement("i");
+  iconElement.classList.add("icon");
+  iconElement.classList.add("material-symbols-outlined");
+  iconElement.textContent = "sailing";
+
+  const separator = document.createElement("span");
+  separator.classList.add("separator");
+  separator.textContent = "x";
+
+  const counter = document.createElement("span");
+  counter.classList.add("value");
+  counter.textContent = 0;
+
+  ships.append(iconElement, separator, counter);
+
+  return ships;
+}
+
 const createGameBoard = (playerName) => {
   const gameBoard = document.createElement("div");
   gameBoard.classList.add("gameboard");
@@ -79,7 +101,12 @@ const createGameBoard = (playerName) => {
   const actions = document.createElement("div");
   actions.classList.add("actions");
 
-  gameBoard.append(createTitle(playerName), createBoard(), actions);
+  gameBoard.append(
+    createTitle(playerName),
+    createBoard(),
+    actions,
+    createShipsCounter(),
+  );
 
   return gameBoard;
 };
