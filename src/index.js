@@ -23,3 +23,4 @@ const boardsContainer = document.querySelector(".gameboards-container");
 
 // game.setupGame();
 boardsContainer.append(createGameBoard("Player 1"));
+boardsContainer.append(createGameBoard("Player 2"));
