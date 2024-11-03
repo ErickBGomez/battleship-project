@@ -126,11 +126,18 @@ function updateShipCounter(counter, value) {
 
 function createConfirmButton() {
   const button = document.createElement("button");
-  button.classList.add("button");
+  button.classList.add("confirm");
   button.classList.add("hidden");
   button.textContent = "Confirm";
 
   return button;
+}
+
+function showConfirmButton(playerId) {
+  const gameboard = getGameboard(playerId);
+  const button = gameboard.querySelector(".confirm");
+
+  button.classList.remove("hidden");
 }
 
 function createGameBoard(player) {
@@ -152,4 +159,4 @@ function createGameBoard(player) {
   return gameBoard;
 }
 
-export { createGameBoard, updateBoard };
+export { createGameBoard, updateBoard, showConfirmButton };

@@ -1,5 +1,5 @@
 import Observer from "../model/observer";
-import { updateBoard } from "./gameboard";
+import { showConfirmButton, updateBoard } from "./gameboard";
 import updateTime from "./timer";
 
 class GameObserver extends Observer {
@@ -7,6 +7,10 @@ class GameObserver extends Observer {
     switch (event) {
       case "update":
         updateBoard(data);
+        break;
+
+      case "show confirm":
+        showConfirmButton(data);
         break;
 
       case "time":

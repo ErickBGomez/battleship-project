@@ -249,6 +249,7 @@ class Game {
     }
 
     this.#notify("update", this.currentPlayer);
+    this.#notify("show confirm", this.currentPlayer.id);
 
     // if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
