@@ -133,9 +133,24 @@ function createConfirmButton() {
   return button;
 }
 
-function showConfirmButton(playerId) {
+function showConfirmButton(playerId, event) {
   const gameboard = getGameboard(playerId);
   const button = gameboard.querySelector(".confirm");
+
+  switch (event) {
+    case "placement":
+      button.addEventListener("click", () => {
+        const newEvent = new CustomEvent("confirmPlacement");
+        document.dispatchEvent(newEvent);
+        button.classList.add("hidden");
+      });
+      break;
+
+    case "attack":
+      break;
+
+    default:
+  }
 
   button.classList.remove("hidden");
 }

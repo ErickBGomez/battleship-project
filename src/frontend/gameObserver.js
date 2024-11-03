@@ -9,8 +9,8 @@ class GameObserver extends Observer {
         updateBoard(data);
         break;
 
-      case "show confirm":
-        showConfirmButton(data);
+      case "confirm placement":
+        showConfirmButton(data, "placement");
         break;
 
       case "time":

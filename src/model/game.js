@@ -44,6 +44,11 @@ class Game {
     } else {
       this.#players.push(new Player(1, "Player 1"), new Player(2, "Player 2"));
     }
+
+    document.addEventListener("confirmPlacement", () => {
+      this.#swapNextPlayer();
+      this.#placeShips();
+    });
   }
 
   // Getters and setters
@@ -249,7 +254,7 @@ class Game {
     }
 
     this.#notify("update", this.currentPlayer);
-    this.#notify("show confirm", this.currentPlayer.id);
+    this.#notify("confirm placement", this.currentPlayer.id);
 
     // if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
