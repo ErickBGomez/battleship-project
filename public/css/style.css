@@ -82,10 +82,16 @@ a {
 }
 
 .gameboard {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+}
+
+.confirm {
+  position: absolute;
+  bottom: -60px;
 }
 
 .board {
