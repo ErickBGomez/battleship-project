@@ -1,3 +1,9 @@
+import Coordinates from "../model/coordinates";
+
+function getGameboard(playerId) {
+  return document.querySelector(`.gameboard[data-player-id="${playerId}"]`);
+}
+
 function createTitle(playerName) {
   const title = document.createElement("h1");
   title.classList.add("title");
@@ -15,8 +21,6 @@ function setCells(offset) {
   const cells = document.createElement("div");
   cells.classList.add("cells");
 
-  const cellsArray = [];
-
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const coordinates = String.fromCharCode(offset + j) + (i + 1);
@@ -24,13 +28,30 @@ function setCells(offset) {
       cell.classList.add("cell");
       cell.dataset.coordinates = coordinates;
 
-      cellsArray.push(cell);
+      cells.append(cell);
     }
   }
 
-  cells.append(...cellsArray);
-
   return cells;
+}
+
+function updateCells(cells, gameboard) {
+  cells.forEach((cell) => {
+    const gameboardCell = gameboard.getCellByCoordinates(
+      new Coordinates(cell.dataset.coordinates),
+    );
+
+    // Reset classes
+    cell.className = "cell";
+
+    if (gameboardCell.ship) {
+      cell.classList.add("ship");
+    }
+
+    if (gameboardCell.hit) {
+      cell.classList.add("hit");
+    }
+  });
 }
 
 function createBoardLabels(offset) {
@@ -68,6 +89,15 @@ function createBoard() {
   return board;
 }
 
+function updateBoard(player) {
+  const gameboard = getGameboard(player.id);
+  const cells = gameboard.querySelectorAll(".cell");
+  const shipsCounter = gameboard.querySelector(".ships .value");
+
+  updateCells(cells, player.gameboard);
+  updateShipCounter(shipsCounter, player.gameboard.availableShips);
+}
+
 function createShipsCounter() {
   const ships = document.createElement("div");
   ships.classList.add("ships");
@@ -90,6 +120,10 @@ function createShipsCounter() {
   return ships;
 }
 
+function updateShipCounter(counter, value) {
+  counter.textContent = value;
+}
+
 function createConfirmButton() {
   const button = document.createElement("button");
   button.classList.add("button");
@@ -102,6 +136,7 @@ function createConfirmButton() {
 function createGameBoard(player) {
   const gameBoard = document.createElement("div");
   gameBoard.classList.add("gameboard");
+  gameBoard.dataset.playerId = player.id;
 
   const actions = document.createElement("div");
   actions.classList.add("actions");
@@ -117,4 +152,4 @@ function createGameBoard(player) {
   return gameBoard;
 }
 
-export default createGameBoard;
+export { createGameBoard, updateBoard };

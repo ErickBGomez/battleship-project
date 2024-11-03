@@ -2,7 +2,7 @@ import "../public/css/style.css";
 import "../public/css/material-symbols.css";
 import Game from "./model/game";
 import GameObserver from "./frontend/gameObserver";
-import createGameBoard from "./frontend/gameboard";
+import { createGameBoard } from "./frontend/gameboard";
 
 const boardsContainer = document.querySelector(".gameboards-container");
 
