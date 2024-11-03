@@ -37,11 +37,12 @@ class Game {
 
   constructor(vsComputer) {
     if (vsComputer) {
-      this.#players.push(new Player(1, "Player"));
-      this.#players.push(new ComputerPlayer(2, "CPU", "hard"));
+      this.#players.push(
+        new Player(1, "Player"),
+        new ComputerPlayer(2, "CPU", "hard"),
+      );
     } else {
-      this.#players.push(new Player(1, "Player 1"));
-      this.#players.push(new Player(2, "Player 2"));
+      this.#players.push(new Player(1, "Player 1"), new Player(2, "Player 2"));
     }
   }
 
@@ -197,10 +198,6 @@ class Game {
   }
 
   #placeShips() {
-    this.#state = "placing";
-    this.currentPlayer.state = "placing";
-    this.nextPlayer.state = "waiting";
-
     const ships = [
       new Ship(2, "Destroyer"),
       new Ship(3, "Submarine"),
@@ -217,7 +214,6 @@ class Game {
       res = confirm(
         `Placing ships for ${this.currentPlayer.name}\nSelect placement? True: Manual. False: Random`,
       );
-      showButton("placement");
     }
 
     while (ships.length) {
@@ -249,11 +245,11 @@ class Game {
         );
         ships.shift();
       } catch (error) {
-        // console.error(error);
+        console.error(error);
       }
     }
 
-    updateBoard(this.currentPlayer, this.#state);
+    this.#notify("update", this.currentPlayer);
 
     if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
@@ -296,21 +292,10 @@ class Game {
     }, 1000);
   }
 
-  #setupPlayers() {
-    this.currentPlayer.state = "waiting";
-    this.nextPlayer.state = "waiting";
-
-    updateBoard(this.currentPlayer, this.#state);
-    updateBoard(this.nextPlayer, this.#state);
-  }
-
   // Public functions
   setupGame() {
-    // this.#setupPlayers();
-    // Start game with current player placement
-    // this.#placeShips();
-
     this.#countTime();
+    this.#placeShips();
   }
 }
 
