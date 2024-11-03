@@ -1,5 +1,5 @@
 import Observer from "../model/observer";
-import { showConfirmButton, updateBoard } from "./gameboard";
+import { setCellsEvents, showConfirmButton, updateBoard } from "./gameboard";
 import updateTime from "./timer";
 
 class GameObserver extends Observer {
@@ -11,6 +11,10 @@ class GameObserver extends Observer {
 
       case "confirm placement":
         showConfirmButton(data, "placement");
+        break;
+
+      case "set cells events":
+        setCellsEvents(data);
         break;
 
       case "time":

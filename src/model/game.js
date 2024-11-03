@@ -46,7 +46,14 @@ class Game {
     }
 
     document.addEventListener("confirmPlacement", () => {
+      this.#placeShipsTurns++;
       this.#swapNextPlayer();
+
+      if (this.#placeShipsTurns >= 2) {
+        this.#playTurn();
+        return;
+      }
+
       this.#placeShips();
     });
   }
@@ -177,16 +184,6 @@ class Game {
     }
   }
 
-  #setEvents(player) {
-    const cells = getBoardCells(player);
-
-    cells.forEach((cell) => {
-      cell.addEventListener("click", (e) => {
-        this.#handleTurn(new Coordinates(e.target.dataset.coordinates));
-      });
-    });
-  }
-
   #tryComputerSelection() {
     if (!this.#isComputer(this.currentPlayer)) return;
 
@@ -260,17 +257,15 @@ class Game {
   }
 
   #playTurn() {
-    this.currentPlayer.state = "attacking";
-    this.nextPlayer.state = "waiting";
-
-    updateBoard(this.currentPlayer, this.#state);
-    updateBoard(this.nextPlayer, this.#state);
-
     if (this.#isComputer(this.currentPlayer)) {
-      this.#tryComputerSelection();
-    } else {
-      this.#setEvents(this.nextPlayer);
+      // this.#tryComputerSelection();
+      return;
     }
+
+    this.#notify("set cells events", {
+      playerId: this.nextPlayer.id,
+      gameboard: this.nextPlayer.gameboard,
+    });
   }
 
   #delegateShipPlacement() {

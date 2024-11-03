@@ -54,6 +54,24 @@ function updateCells(cells, gameboard) {
   });
 }
 
+function setCellsEvents({ playerId, gameboard }) {
+  const cells = getGameboard(playerId).querySelectorAll(".cell");
+
+  const myEvent = () => {
+    console.log("myEvent");
+  };
+
+  cells.forEach((cell) => {
+    const currentCell = gameboard.getCellByCoordinates(
+      new Coordinates(cell.dataset.coordinates),
+    );
+
+    if (!currentCell.hit) {
+      cell.addEventListener("click", myEvent);
+    }
+  });
+}
+
 function createBoardLabels(offset) {
   const labels = [];
 
@@ -174,4 +192,4 @@ function createGameBoard(player) {
   return gameBoard;
 }
 
-export { createGameBoard, updateBoard, showConfirmButton };
+export { createGameBoard, updateBoard, showConfirmButton, setCellsEvents };
