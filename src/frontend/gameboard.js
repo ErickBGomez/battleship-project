@@ -4,6 +4,38 @@ function getGameboard(playerId) {
   return document.querySelector(`.gameboard[data-player-id="${playerId}"]`);
 }
 
+function getGameboards() {
+  return document.querySelectorAll(".gameboard");
+}
+
+function createCurrentPlayerIndicator() {
+  const indicator = document.createElement("div");
+  indicator.classList.add("indicator");
+
+  const iconElement = document.createElement("i");
+  iconElement.classList.add("icon");
+  iconElement.classList.add("material-symbols-outlined");
+  iconElement.textContent = "flag";
+
+  indicator.append(iconElement);
+
+  return indicator;
+}
+
+function showCurrentPlayerIndicator(playerId) {
+  const gameboards = getGameboards();
+  const currentPlayerGameboard = getGameboard(playerId);
+  const currentPlayerIndicator =
+    currentPlayerGameboard.querySelector(".indicator");
+
+  gameboards.forEach((gameboard) => {
+    const indicator = gameboard.querySelector(".indicator");
+    indicator.classList.add("hidden");
+  });
+
+  currentPlayerIndicator.classList.remove("hidden");
+}
+
 function createTitle(playerName) {
   const title = document.createElement("h1");
   title.classList.add("title");
@@ -12,7 +44,7 @@ function createTitle(playerName) {
   playerNameElement.classList.add("player-name");
   playerNameElement.textContent = playerName;
 
-  title.append(playerNameElement);
+  title.append(createCurrentPlayerIndicator(), playerNameElement);
 
   return title;
 }
@@ -198,4 +230,10 @@ function createGameBoard(player) {
   return gameBoard;
 }
 
-export { createGameBoard, updateBoard, showConfirmButton, setCellsEvents };
+export {
+  createGameBoard,
+  updateBoard,
+  showConfirmButton,
+  setCellsEvents,
+  showCurrentPlayerIndicator,
+};

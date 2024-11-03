@@ -62,8 +62,7 @@ button {
   cursor: pointer;
 }
 
-button.hidden,
-.gameboard-container.hidden {
+.hidden {
   display: none;
 }
 
@@ -87,6 +86,16 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+}
+
+.title {
+  position: relative;
+}
+
+.title .indicator {
+  position: absolute;
+  left: -45px;
+  color: var(--primary-color);
 }
 
 .confirm {

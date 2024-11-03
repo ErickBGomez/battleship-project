@@ -200,6 +200,8 @@ class Game {
   }
 
   #placeShips() {
+    this.#notify("show current player", this.currentPlayer.id);
+
     const ships = [
       new Ship(2, "Destroyer"),
       new Ship(3, "Submarine"),
@@ -257,10 +259,14 @@ class Game {
   }
 
   #playTurn() {
+    this.#notify("show current player", this.currentPlayer.id);
+
     if (this.#isComputer(this.currentPlayer)) {
       // this.#tryComputerSelection();
       return;
     }
+
+    this.#notify("show current player", this.currentPlayer.id);
 
     this.#notify("set cells events", {
       playerId: this.nextPlayer.id,
