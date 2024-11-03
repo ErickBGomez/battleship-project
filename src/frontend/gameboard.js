@@ -57,18 +57,24 @@ function updateCells(cells, gameboard) {
 function setCellsEvents({ playerId, gameboard }) {
   const cells = getGameboard(playerId).querySelectorAll(".cell");
 
-  const myEvent = () => {
-    console.log("myEvent");
-  };
-
   cells.forEach((cell) => {
     const currentCell = gameboard.getCellByCoordinates(
       new Coordinates(cell.dataset.coordinates),
     );
 
     if (!currentCell.hit) {
-      cell.addEventListener("click", myEvent);
+      cell.addEventListener("click", () => {
+        console.log("myEvent");
+        resetCellsEvents(cells);
+      });
     }
+  });
+}
+
+function resetCellsEvents(cells) {
+  cells.forEach((cell) => {
+    const newNode = cell.cloneNode(true);
+    cell.parentNode.replaceChild(newNode, cell);
   });
 }
 
