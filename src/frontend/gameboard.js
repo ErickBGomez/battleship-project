@@ -6,11 +6,7 @@ function createTitle(playerName) {
   playerNameElement.classList.add("player-name");
   playerNameElement.textContent = playerName;
 
-  const titleContent = document.createElement("span");
-  titleContent.classList.add("title-content");
-  titleContent.textContent = "'s Board";
-
-  title.append(playerNameElement, titleContent);
+  title.append(playerNameElement);
 
   return title;
 }
