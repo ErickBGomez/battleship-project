@@ -90,7 +90,16 @@ function createShipsCounter() {
   return ships;
 }
 
-const createGameBoard = (player) => {
+function createConfirmButton() {
+  const button = document.createElement("button");
+  button.classList.add("button");
+  button.classList.add("hidden");
+  button.textContent = "Confirm";
+
+  return button;
+}
+
+function createGameBoard(player) {
   const gameBoard = document.createElement("div");
   gameBoard.classList.add("gameboard");
 
@@ -102,9 +111,10 @@ const createGameBoard = (player) => {
     createBoard(),
     actions,
     createShipsCounter(),
+    createConfirmButton(),
   );
 
   return gameBoard;
-};
+}
 
 export default createGameBoard;

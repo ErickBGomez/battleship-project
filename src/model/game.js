@@ -237,7 +237,9 @@ class Game {
           ).value;
           direction = randomDirection();
         }
-
+        console.log(ship);
+        console.log(coords);
+        console.log(direction);
         this.currentPlayer.gameboard.placeShip(
           ship,
           new Coordinates(coords),
@@ -251,7 +253,7 @@ class Game {
 
     this.#notify("update", this.currentPlayer);
 
-    if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
+    // if (this.#isComputer(this.currentPlayer)) this.#delegateShipPlacement();
   }
 
   #playTurn() {
